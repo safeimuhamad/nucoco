@@ -4,6 +4,12 @@
     <?php
     require_once dirname(__DIR__, 2) . '/includes/bootstrap.php';
 
+    if (!headers_sent()) {
+        header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+        header('Pragma: no-cache');
+        header('Expires: Thu, 01 Jan 1970 00:00:00 GMT');
+    }
+
     $base_url = site_base_url();
     $admin_base_url = admin_base_url();
     $admin_name = $_SESSION['name'] ?? 'John Doe';

@@ -13,6 +13,12 @@
                 <?php
                 $admin_name = $_SESSION['name'] ?? 'John Doe';
                 $admin_role = $_SESSION['role'] ?? 'Administrator';
+                $admin_menu_version = '20260531-2';
+                $admin_menu_url = static function ($path, $key) use ($admin_menu_version) {
+                    $url = admin_url($path);
+                    $separator = str_contains($url, '?') ? '&' : '?';
+                    return $url . $separator . 'nav=' . rawurlencode($key) . '&v=' . rawurlencode($admin_menu_version);
+                };
                 $menu_groups = [
                     '' => [
                         'dashboard' => ['title' => 'Dashboard', 'icon' => 'home', 'url' => 'dashboard/index.php', 'permission' => 'dashboard.view'],
@@ -59,7 +65,7 @@
 
                         <?php foreach ($visible_menus as $key => $menu): ?>
                             <li class="menu-item <?= ($page == $key) ? 'open' : '' ?>">
-                                <a href="<?= admin_url($menu['url']) ?>" class="menu-link <?= ($page == $key) ? 'active' : '' ?>">
+                                <a href="<?= $admin_menu_url($menu['url'], $key) ?>" class="menu-link <?= ($page == $key) ? 'active' : '' ?>">
                                     <span class="material-symbols-outlined menu-icon"><?= $menu['icon'] ?></span>
                                     <span class="title"><?= $menu['title'] ?></span>
                                 </a>
