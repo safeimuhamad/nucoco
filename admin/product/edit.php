@@ -319,8 +319,10 @@ include __DIR__ . '/../includes/sidebar.php';
                                 <img src="<?= $base_url ?>uploads/<?= htmlspecialchars($current_image) ?>" width="100" alt="">
                             </div>
                         <?php endif; ?>
-                        <input type="file" class="form-control" name="image">
-                        <small class="text-secondary">Leave empty if you don’t want to change image</small>
+                        <input type="file" class="form-control" name="image" accept=".jpg,.jpeg,.png,.webp">
+                        <small class="text-secondary d-block mt-2">
+                            Recommended size: 300 x 300 px, square image, JPG/PNG/WebP, max 2MB. Leave empty if you don’t want to change image.
+                        </small>
                     </div>
                 </div>
 

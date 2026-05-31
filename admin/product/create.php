@@ -265,7 +265,10 @@ include __DIR__ . '/../includes/sidebar.php';
                     </div>
                     <div class="mb-20">
                         <label class="label fs-16 mb-2">Upload Product Image</label>
-                        <input type="file" class="form-control" name="image" required>
+                        <input type="file" class="form-control" name="image" accept=".jpg,.jpeg,.png,.webp" required>
+                        <small class="text-secondary d-block mt-2">
+                            Recommended size: 300 x 300 px, square image, JPG/PNG/WebP, max 2MB.
+                        </small>
                     </div>
                 </div>
                 <!-- SEO -->
