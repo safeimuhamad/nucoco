@@ -7,6 +7,7 @@ include __DIR__ . '/../includes/auth.php';
 include __DIR__ . '/../includes/header.php';
 include __DIR__ . '/../includes/sidebar.php';
 require_once __DIR__ . '/../includes/db.php';
+require_once __DIR__ . '/../includes/helpers.php';
 
 $limit = 10;
 $page_num = isset($_GET['page']) ? (int) $_GET['page'] : 1;
@@ -264,7 +265,7 @@ $end_data = ($total_data > 0) ? min($start + $limit, $total_data) : 0;
                                     </div>
                                 </td>
                                 <td><?= htmlspecialchars($row['category'] ?? '') ?></td>
-                                <td>$<?= number_format((float) ($row['price'] ?? 0)) ?></td>
+                                <td><?= htmlspecialchars(product_format_price($row['price'] ?? 0, $row['language'] ?? 'en')) ?></td>
                                 <td><?= !empty($row['created_at']) ? date('M d, Y', strtotime($row['created_at'])) : '-' ?></td>
                             </tr>
                         <?php endwhile; ?>

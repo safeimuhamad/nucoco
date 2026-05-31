@@ -197,11 +197,16 @@ include __DIR__ . '/../includes/sidebar.php';
                                         type="number"
                                         class="form-control"
                                         name="price"
+                                        id="product-price-input"
                                         value="<?= htmlspecialchars($price ?? '') ?>"
+                                        inputmode="decimal"
                                         required
                                     >
                                     <label>Price</label>
                                 </div>
+                                <small class="text-secondary d-block mt-2" id="product-price-help">
+                                    Currency: <?= product_currency_code($language ?? 'en') ?>.
+                                </small>
                             </div>
                         </div>
 
@@ -227,7 +232,7 @@ include __DIR__ . '/../includes/sidebar.php';
                     <div class="mb-20">
                         <label class="label fs-16 mb-2">Language</label>
                         <div class="form-floating">
-                            <select class="form-select" name="language" required>
+                            <select class="form-select" name="language" id="product-language-select" required>
                                 <option value="en" <?= ($language === 'en') ? 'selected' : '' ?>>English</option>
                                 <option value="id" <?= ($language === 'id') ? 'selected' : '' ?>>Indonesia</option>
                             </select>
@@ -303,5 +308,21 @@ include __DIR__ . '/../includes/sidebar.php';
     </div>
 
     <div class="flex-grow-1"></div>
+    <script>
+        (() => {
+            const languageSelect = document.getElementById('product-language-select');
+            const priceHelp = document.getElementById('product-price-help');
+
+            if (!languageSelect || !priceHelp) return;
+
+            const syncPriceCurrency = () => {
+                const currency = languageSelect.value === 'id' ? 'IDR' : 'USD';
+                priceHelp.textContent = `Currency: ${currency}.`;
+            };
+
+            languageSelect.addEventListener('change', syncPriceCurrency);
+            syncPriceCurrency();
+        })();
+    </script>
     <?php include __DIR__ . '/../includes/footer.php'; ?>
 </div>

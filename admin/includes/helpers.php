@@ -8,6 +8,24 @@ function generate_slug($text)
     return trim($text, '-');
 }
 
+if (!function_exists('product_currency_code')) {
+    function product_currency_code($language)
+    {
+        return $language === 'id' ? 'IDR' : 'USD';
+    }
+}
+
+if (!function_exists('product_format_price')) {
+    function product_format_price($price, $language)
+    {
+        $amount = number_format((float) $price, 0, '.', ',');
+
+        return product_currency_code($language) === 'IDR'
+            ? 'Rp ' . $amount
+            : 'USD ' . $amount;
+    }
+}
+
 function convert_to_webp($source, $destination, $quality = 80)
 {
     if (!file_exists($source)) {
@@ -123,4 +141,3 @@ function resize_to_webp($source, $destination, $target_width, $quality = 80)
 
     return $result;
 }
-

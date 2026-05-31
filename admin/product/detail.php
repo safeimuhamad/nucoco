@@ -3,6 +3,7 @@ $page = 'product';
 include __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../includes/db.php';
 require_once __DIR__ . '/../includes/detail-ui.php';
+require_once __DIR__ . '/../includes/helpers.php';
 
 $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 $item = db_select_one("SELECT * FROM products WHERE id = ? LIMIT 1", 'i', [$id]);
@@ -23,7 +24,7 @@ include __DIR__ . '/../includes/sidebar.php';
     detail_summary([
         ['label' => 'Product', 'value' => $item['name'] ?? '-', 'icon' => 'inventory_2', 'meta' => $item['category'] ?? '-'],
         ['label' => 'Language', 'value' => strtoupper($item['language'] ?? '-'), 'icon' => 'translate', 'meta' => $item['status'] ?? '-'],
-        ['label' => 'Price', 'value' => number_format((float) ($item['price'] ?? 0), 2), 'icon' => 'sell', 'meta' => 'Item price'],
+        ['label' => 'Price', 'value' => product_format_price($item['price'] ?? 0, $item['language'] ?? 'en'), 'icon' => 'sell', 'meta' => 'Item price'],
     ]);
     ?>
     <?php detail_card_open('Product Information', 'inventory_2'); ?>
@@ -37,7 +38,7 @@ include __DIR__ . '/../includes/sidebar.php';
                     'Language' => detail_text(strtoupper($item['language'] ?? '-')),
                     'Category' => detail_text($item['category'] ?? '-'),
                     'Status' => '<span class="' . detail_badge_class($item['status'] ?? '') . '">' . detail_text($item['status'] ?? '-') . '</span>',
-                    'Price' => detail_text(number_format((float) ($item['price'] ?? 0), 2)),
+                    'Price' => detail_text(product_format_price($item['price'] ?? 0, $item['language'] ?? 'en')),
                 ]); ?>
                 <hr>
                 <h5 class="fs-15 fw-bold mb-2">Web Description</h5>
