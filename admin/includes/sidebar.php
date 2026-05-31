@@ -15,30 +15,30 @@
                 $admin_role = $_SESSION['role'] ?? 'Administrator';
                 $menu_groups = [
                     '' => [
-                        'dashboard' => ['title' => 'Dashboard', 'icon' => 'home', 'url' => 'dashboard', 'permission' => 'dashboard.view'],
+                        'dashboard' => ['title' => 'Dashboard', 'icon' => 'home', 'url' => 'dashboard/index.php', 'permission' => 'dashboard.view'],
                     ],
                     'Sales Management' => [
-                        'leads' => ['title' => 'Leads', 'icon' => 'group', 'url' => 'leads', 'permission' => 'sales.leads.manage'],
-                        'quotations' => ['title' => 'Quotations', 'icon' => 'request_quote', 'url' => 'quotations', 'permission' => 'sales.quotations.manage'],
-                        'invoices' => ['title' => 'Invoices', 'icon' => 'receipt_long', 'url' => 'invoices', 'permission' => 'sales.invoices.manage'],
+                        'leads' => ['title' => 'Leads', 'icon' => 'group', 'url' => 'leads/index.php', 'permission' => 'sales.leads.manage'],
+                        'quotations' => ['title' => 'Quotations', 'icon' => 'request_quote', 'url' => 'quotations/index.php', 'permission' => 'sales.quotations.manage'],
+                        'invoices' => ['title' => 'Invoices', 'icon' => 'receipt_long', 'url' => 'invoices/index.php', 'permission' => 'sales.invoices.manage'],
                     ],
                     'Web Admin' => [
-                        'inbox' => ['title' => 'Inbox', 'icon' => 'email', 'url' => 'inbox', 'permission' => 'webadmin.inbox.manage'],
-                        'pages' => ['title' => 'Pages', 'icon' => 'description', 'url' => 'pages', 'permission' => 'webadmin.pages.manage'],
-                        'pages-content' => ['title' => 'Page Content', 'icon' => 'article', 'url' => 'pages-content', 'permission' => 'webadmin.page_content.manage'],
-                        'product' => ['title' => 'Products', 'icon' => 'inventory_2', 'url' => 'product', 'permission' => 'webadmin.products.manage'],
-                        'services' => ['title' => 'Services', 'icon' => 'support_agent', 'url' => 'services', 'permission' => 'webadmin.services.manage'],
-                        'news' => ['title' => 'News', 'icon' => 'newspaper', 'url' => 'news', 'permission' => 'webadmin.news.manage'],
-                        'team' => ['title' => 'Team', 'icon' => 'groups', 'url' => 'team', 'permission' => 'webadmin.team.manage'],
-                        'testimonial' => ['title' => 'Testimonial', 'icon' => 'reviews', 'url' => 'testimonial', 'permission' => 'webadmin.testimonial.manage'],
-                        'faq' => ['title' => 'FAQ', 'icon' => 'quiz', 'url' => 'faq', 'permission' => 'webadmin.faq.manage'],
-                        'choose-us' => ['title' => 'Choose Us', 'icon' => 'task_alt', 'url' => 'choose-us', 'permission' => 'webadmin.choose_us.manage'],
-                        'setting' => ['title' => 'Web Settings', 'icon' => 'settings', 'url' => 'setting', 'permission' => 'webadmin.settings.manage'],
+                        'inbox' => ['title' => 'Inbox', 'icon' => 'email', 'url' => 'inbox/index.php', 'permission' => 'webadmin.inbox.manage'],
+                        'pages' => ['title' => 'Pages', 'icon' => 'description', 'url' => 'pages/index.php', 'permission' => 'webadmin.pages.manage'],
+                        'pages-content' => ['title' => 'Page Content', 'icon' => 'article', 'url' => 'pages-content/index.php', 'permission' => 'webadmin.page_content.manage'],
+                        'product' => ['title' => 'Products', 'icon' => 'inventory_2', 'url' => 'product/index.php', 'permission' => 'webadmin.products.manage'],
+                        'services' => ['title' => 'Services', 'icon' => 'support_agent', 'url' => 'services/index.php', 'permission' => 'webadmin.services.manage'],
+                        'news' => ['title' => 'News', 'icon' => 'newspaper', 'url' => 'news/index.php', 'permission' => 'webadmin.news.manage'],
+                        'team' => ['title' => 'Team', 'icon' => 'groups', 'url' => 'team/index.php', 'permission' => 'webadmin.team.manage'],
+                        'testimonial' => ['title' => 'Testimonial', 'icon' => 'reviews', 'url' => 'testimonial/index.php', 'permission' => 'webadmin.testimonial.manage'],
+                        'faq' => ['title' => 'FAQ', 'icon' => 'quiz', 'url' => 'faq/index.php', 'permission' => 'webadmin.faq.manage'],
+                        'choose-us' => ['title' => 'Choose Us', 'icon' => 'task_alt', 'url' => 'choose-us/index.php', 'permission' => 'webadmin.choose_us.manage'],
+                        'setting' => ['title' => 'Web Settings', 'icon' => 'settings', 'url' => 'setting/index.php', 'permission' => 'webadmin.settings.manage'],
                     ],
                     'User Management' => [
-                        'users' => ['title' => 'Users', 'icon' => 'person', 'url' => 'users', 'permission' => 'users.users.manage'],
-                        'user-roles' => ['title' => 'User Roles', 'icon' => 'admin_panel_settings', 'url' => 'user-roles', 'permission' => 'users.roles.manage'],
-                        'user-access' => ['title' => 'User Access', 'icon' => 'lock_open', 'url' => 'user-access', 'permission' => 'users.access.manage'],
+                        'users' => ['title' => 'Users', 'icon' => 'person', 'url' => 'users/index.php', 'permission' => 'users.users.manage'],
+                        'user-roles' => ['title' => 'User Roles', 'icon' => 'admin_panel_settings', 'url' => 'user-roles/index.php', 'permission' => 'users.roles.manage'],
+                        'user-access' => ['title' => 'User Access', 'icon' => 'lock_open', 'url' => 'user-access/index.php', 'permission' => 'users.access.manage'],
                     ],
                 ];
                 ?>
@@ -59,7 +59,7 @@
 
                         <?php foreach ($visible_menus as $key => $menu): ?>
                             <li class="menu-item <?= ($page == $key) ? 'open' : '' ?>">
-                                <a href="<?= $admin_base_url . $menu['url'] ?>" class="menu-link <?= ($page == $key) ? 'active' : '' ?>">
+                                <a href="<?= admin_url($menu['url']) ?>" class="menu-link <?= ($page == $key) ? 'active' : '' ?>">
                                     <span class="material-symbols-outlined menu-icon"><?= $menu['icon'] ?></span>
                                     <span class="title"><?= $menu['title'] ?></span>
                                 </a>
