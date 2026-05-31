@@ -20,7 +20,7 @@ $status = 'draft';
 $seo_keywords = '';
 $description = '';
 $quotation_description = '';
-$product_category_labels = product_category_labels();
+$product_category_labels = product_category_labels($conn);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = trim($_POST['name'] ?? '');

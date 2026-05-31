@@ -26,8 +26,8 @@ if (!function_exists('product_format_price')) {
     }
 }
 
-if (!function_exists('product_category_labels')) {
-    function product_category_labels()
+if (!function_exists('product_default_category_labels')) {
+    function product_default_category_labels()
     {
         return [
             'Fresh Coconut' => [
@@ -47,6 +47,57 @@ if (!function_exists('product_category_labels')) {
                 'id' => 'Produk Industri Kelapa',
             ],
         ];
+    }
+}
+
+if (!function_exists('product_category_labels')) {
+    function product_category_labels($conn = null)
+    {
+        static $cached_labels = null;
+
+        if ($cached_labels !== null) {
+            return $cached_labels;
+        }
+
+        if ($conn === null && isset($GLOBALS['conn']) && $GLOBALS['conn'] instanceof mysqli) {
+            $conn = $GLOBALS['conn'];
+        }
+
+        if ($conn instanceof mysqli) {
+            $table_check = @mysqli_query($conn, "SHOW TABLES LIKE 'product_categories'");
+            if ($table_check && mysqli_num_rows($table_check) > 0) {
+                $result = @mysqli_query(
+                    $conn,
+                    "SELECT category_key, label_en, label_id
+                     FROM product_categories
+                     WHERE status = 'active'
+                     ORDER BY sort_order ASC, id ASC"
+                );
+
+                if ($result) {
+                    $labels = [];
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $key = trim($row['category_key'] ?? '');
+                        if ($key === '') {
+                            continue;
+                        }
+
+                        $labels[$key] = [
+                            'en' => $row['label_en'] ?: $key,
+                            'id' => $row['label_id'] ?: ($row['label_en'] ?: $key),
+                        ];
+                    }
+
+                    if ($labels) {
+                        $cached_labels = $labels;
+                        return $cached_labels;
+                    }
+                }
+            }
+        }
+
+        $cached_labels = product_default_category_labels();
+        return $cached_labels;
     }
 }
 
