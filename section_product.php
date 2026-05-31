@@ -82,7 +82,7 @@ if ($category_stmt) {
                                     data-bs-toggle="tab"
                                     href="#product_tab_<?= $index + 1 ?>"
                                 >
-                                    <?= htmlspecialchars($cat['category']) ?>
+                                    <?= htmlspecialchars(product_category_label($cat['category'], $lang)) ?>
                                 </a>
                             <?php endforeach; ?>
                         </div>
@@ -155,7 +155,7 @@ if ($category_stmt) {
                                                     href="<?= $base_url . $product_list_base . '?category=' . urlencode($category_name) ?>" 
                                                     class="theme-btn-1 btn btn-effect-1 text-uppercase"
                                                 >
-                                                    <?= $is_en ? 'Explore ' . htmlspecialchars($category_name) : 'Lihat ' . htmlspecialchars($category_name) ?>
+                                                    <?= $is_en ? 'Explore ' . htmlspecialchars(product_category_label($category_name, $lang)) : 'Lihat ' . htmlspecialchars(product_category_label($category_name, $lang)) ?>
                                                 </a>
                                             </div>
                                         <?php else: ?>

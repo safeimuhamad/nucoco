@@ -48,6 +48,7 @@ $seo_keywords = $product['seo_keywords'] ?? '';
 $description = $product['description'] ?? '';
 $quotation_description = $product['quotation_description'] ?? '';
 $current_image = $product['image'] ?? '';
+$product_category_labels = product_category_labels();
 
 /*
 |--------------------------------------------------------------------------
@@ -295,12 +296,18 @@ include __DIR__ . '/../includes/sidebar.php';
                     <div class="mb-20">
                         <label class="label fs-16 mb-2">Category</label>
                         <div class="form-floating">
-                            <select class="form-select" name="category" required>
+                            <select class="form-select" name="category" id="product-category-select" required>
                                 <option value="">Select</option>
-                                <option value="Fresh Coconut" <?= ($category === 'Fresh Coconut') ? 'selected' : '' ?>>Fresh Coconut</option>
-                                <option value="Coconut Ingredients" <?= ($category === 'Coconut Ingredients') ? 'selected' : '' ?>>Coconut Ingredients</option>
-                                <option value="Coconut Derivatives" <?= ($category === 'Coconut Derivatives') ? 'selected' : '' ?>>Coconut Derivatives</option>
-                                <option value="Coconut Industrial Product" <?= ($category === 'Coconut Industrial Product') ? 'selected' : '' ?>>Coconut Industrial Product</option>
+                                <?php foreach ($product_category_labels as $category_value => $labels): ?>
+                                    <option
+                                        value="<?= htmlspecialchars($category_value) ?>"
+                                        data-label-en="<?= htmlspecialchars($labels['en']) ?>"
+                                        data-label-id="<?= htmlspecialchars($labels['id']) ?>"
+                                        <?= ($category === $category_value) ? 'selected' : '' ?>
+                                    >
+                                        <?= htmlspecialchars($labels[$language === 'id' ? 'id' : 'en']) ?>
+                                    </option>
+                                <?php endforeach; ?>
                             </select>
                             <label>Category</label>
                         </div>
@@ -373,6 +380,7 @@ include __DIR__ . '/../includes/sidebar.php';
 <script>
     (() => {
         const languageSelect = document.getElementById('product-language-select');
+        const categorySelect = document.getElementById('product-category-select');
         const priceHelp = document.getElementById('product-price-help');
 
         if (!languageSelect || !priceHelp) return;
@@ -382,8 +390,26 @@ include __DIR__ . '/../includes/sidebar.php';
             priceHelp.textContent = `Currency: ${currency}.`;
         };
 
-        languageSelect.addEventListener('change', syncPriceCurrency);
+        const syncCategoryLabels = () => {
+            if (!categorySelect) return;
+            const lang = languageSelect.value === 'id' ? 'id' : 'en';
+
+            [...categorySelect.options].forEach((option) => {
+                if (!option.value) {
+                    option.textContent = 'Select';
+                    return;
+                }
+
+                option.textContent = (lang === 'id' ? option.dataset.labelId : option.dataset.labelEn) || option.textContent;
+            });
+        };
+
+        languageSelect.addEventListener('change', () => {
+            syncPriceCurrency();
+            syncCategoryLabels();
+        });
         syncPriceCurrency();
+        syncCategoryLabels();
     })();
 </script>
 

@@ -108,7 +108,7 @@ if ($category_stmt) {
                                 <a class="<?= $index === 0 ? 'active show' : '' ?>"
                                    data-bs-toggle="tab"
                                    href="#product_tab_<?= $index + 1 ?>">
-                                    <?= htmlspecialchars($cat['category']) ?>
+                                    <?= htmlspecialchars(product_category_label($cat['category'], $lang)) ?>
                                 </a>
                             <?php endforeach; ?>
                         </div>

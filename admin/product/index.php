@@ -264,7 +264,7 @@ $end_data = ($total_data > 0) ? min($start + $limit, $total_data) : 0;
                                         </a>
                                     </div>
                                 </td>
-                                <td><?= htmlspecialchars($row['category'] ?? '') ?></td>
+                                <td><?= htmlspecialchars(product_category_label($row['category'] ?? '', $row['language'] ?? 'en')) ?></td>
                                 <td><?= htmlspecialchars(product_format_price($row['price'] ?? 0, $row['language'] ?? 'en')) ?></td>
                                 <td><?= !empty($row['created_at']) ? date('M d, Y', strtotime($row['created_at'])) : '-' ?></td>
                             </tr>

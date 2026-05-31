@@ -238,7 +238,7 @@ $current_url = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
                                             <strong><?= $is_en ? 'Category:' : 'Kategori:' ?></strong>
                                             <span>
                                                 <a href="<?= $base_url . $product_list_base ?>">
-                                                    <?= htmlspecialchars($product['category']) ?>
+                                                    <?= htmlspecialchars(product_category_label($product['category'], $product['language'] ?? $lang)) ?>
                                                 </a>
                                             </span>
                                         </li>

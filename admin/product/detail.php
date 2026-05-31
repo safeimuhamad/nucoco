@@ -22,7 +22,7 @@ include __DIR__ . '/../includes/sidebar.php';
         ['label' => 'Delete', 'url' => admin_url('product/delete?id=' . $id), 'icon' => 'delete', 'confirm' => 'Delete this product?', 'class' => 'btn detail-btn detail-btn-danger'],
     ]);
     detail_summary([
-        ['label' => 'Product', 'value' => $item['name'] ?? '-', 'icon' => 'inventory_2', 'meta' => $item['category'] ?? '-'],
+        ['label' => 'Product', 'value' => $item['name'] ?? '-', 'icon' => 'inventory_2', 'meta' => product_category_label($item['category'] ?? '', $item['language'] ?? 'en')],
         ['label' => 'Language', 'value' => strtoupper($item['language'] ?? '-'), 'icon' => 'translate', 'meta' => $item['status'] ?? '-'],
         ['label' => 'Price', 'value' => product_format_price($item['price'] ?? 0, $item['language'] ?? 'en'), 'icon' => 'sell', 'meta' => 'Item price'],
     ]);
@@ -36,7 +36,7 @@ include __DIR__ . '/../includes/sidebar.php';
                 <?php detail_fields([
                     'Product Name' => detail_text($item['name'] ?? '-'),
                     'Language' => detail_text(strtoupper($item['language'] ?? '-')),
-                    'Category' => detail_text($item['category'] ?? '-'),
+                    'Category' => detail_text(product_category_label($item['category'] ?? '', $item['language'] ?? 'en')),
                     'Status' => '<span class="' . detail_badge_class($item['status'] ?? '') . '">' . detail_text($item['status'] ?? '-') . '</span>',
                     'Price' => detail_text(product_format_price($item['price'] ?? 0, $item['language'] ?? 'en')),
                 ]); ?>

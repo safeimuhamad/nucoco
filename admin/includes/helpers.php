@@ -26,6 +26,40 @@ if (!function_exists('product_format_price')) {
     }
 }
 
+if (!function_exists('product_category_labels')) {
+    function product_category_labels()
+    {
+        return [
+            'Fresh Coconut' => [
+                'en' => 'Fresh Coconut',
+                'id' => 'Kelapa Segar',
+            ],
+            'Coconut Ingredients' => [
+                'en' => 'Coconut Ingredients',
+                'id' => 'Bahan Baku Kelapa',
+            ],
+            'Coconut Derivatives' => [
+                'en' => 'Coconut Derivatives',
+                'id' => 'Produk Turunan Kelapa',
+            ],
+            'Coconut Industrial Product' => [
+                'en' => 'Coconut Industrial Product',
+                'id' => 'Produk Industri Kelapa',
+            ],
+        ];
+    }
+}
+
+if (!function_exists('product_category_label')) {
+    function product_category_label($category, $language)
+    {
+        $labels = product_category_labels();
+        $language = $language === 'id' ? 'id' : 'en';
+
+        return $labels[$category][$language] ?? $category;
+    }
+}
+
 function convert_to_webp($source, $destination, $quality = 80)
 {
     if (!file_exists($source)) {
