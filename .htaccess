@@ -1,0 +1,123 @@
+RewriteEngine On
+
+DirectoryIndex index.php
+
+# redirect /index atau /index.php ke /
+RewriteCond %{THE_REQUEST} \s/+(.*/)?index(\.php)?[\s?]
+RewriteRule ^index(\.php)?$ ./ [R=301,L]
+
+RewriteRule ^home/?$ / [L,R=301]
+
+# =========================
+# PRODUK DETAIL ENGLISH
+# /en/product/slug
+# =========================
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^en/product/([a-zA-Z0-9\-]+)/?$ pages/product-detail.php?slug=$1&lang=en [L,QSA]
+
+# =========================
+# PRODUK DETAIL INDONESIA
+# /produk/slug
+# =========================
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^produk/([a-zA-Z0-9\-]+)/?$ pages/product-detail.php?slug=$1&lang=id [L,QSA]
+
+# =========================
+# PRODUK DETAIL DEFAULT
+# /services/slug
+# =========================
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^product/([a-zA-Z0-9\-]+)/?$ pages/product-detail.php?slug=$1 [L,QSA]
+
+# =========================
+# SERVICE DETAIL ENGLISH
+# /en/services/slug
+# =========================
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^en/services/([a-zA-Z0-9\-]+)/?$ pages/services-detail.php?slug=$1&lang=en [L,QSA]
+
+# =========================
+# SERVICE DETAIL INDONESIA
+# /layanan/slug
+# =========================
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^layanan/([a-zA-Z0-9\-]+)/?$ pages/services-detail.php?slug=$1&lang=id [L,QSA]
+
+# =========================
+# SERVICE DETAIL DEFAULT
+# /services/slug
+# =========================
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^services/([a-zA-Z0-9\-]+)/?$ pages/services-detail.php?slug=$1 [L,QSA]
+
+
+# =========================
+# NEWS DETAIL ENGLISH
+# /en/news/slug
+# =========================
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^en/news/([a-zA-Z0-9\-]+)/?$ pages/news-detail.php?slug=$1&lang=en [L,QSA]
+
+# =========================
+# NEWS DETAIL INDONESIA
+# /berita/slug
+# =========================
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^berita/([a-zA-Z0-9\-]+)/?$ pages/news-detail.php?slug=$1&lang=id [L,QSA]
+
+# =========================
+# NEWS DETAIL DEFAULT
+# /news/slug
+# =========================
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^news/([a-zA-Z0-9\-]+)/?$ pages/news-detail.php?slug=$1 [L,QSA]
+
+# rewrite tanpa .php ke file php
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.+)$ $1.php [L]
+
+# fallback ke index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [L,QSA]
+
+<IfModule mod_expires.c>
+    ExpiresActive On
+
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType text/javascript "access plus 1 year"
+
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType application/font-woff2 "access plus 1 year"
+    ExpiresByType application/font-woff "access plus 1 year"
+    ExpiresByType application/vnd.ms-fontobject "access plus 1 year"
+    ExpiresByType font/ttf "access plus 1 year"
+    ExpiresByType application/x-font-ttf "access plus 1 year"
+    ExpiresByType application/octet-stream "access plus 1 year"
+</IfModule>
+
+<IfModule mod_headers.c>
+    <FilesMatch "\.(webp|jpg|jpeg|png|gif|svg|ico|css|js|woff|woff2|ttf|eot)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+</IfModule>

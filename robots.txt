@@ -1,0 +1,28 @@
+User-agent: *
+
+# BLOCK AREA SENSITIF
+Disallow: /admin/
+Disallow: /handlers/
+Disallow: /includes/
+
+# BLOCK SYSTEM / TEMP
+Disallow: /tmp/
+Disallow: /cache/
+Disallow: /cgi-bin/
+
+# BLOCK PARAMETER (hindari duplicate content)
+Disallow: /*?*
+Disallow: /*?utm_*
+Disallow: /*?fbclid=*
+
+# ALLOW ASSETS (WAJIB untuk rendering SEO)
+Allow: /css/
+Allow: /js/
+Allow: /img/
+Allow: /uploads/
+Allow: /media/
+Allow: /fonts/
+Allow: /webfonts/
+
+# SITEMAP
+Sitemap: https://nucoco.id/sitemap.xml

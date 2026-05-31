@@ -1,0 +1,1298 @@
+:root {
+  --nc-green: #15803d;
+  --nc-green-dark: #116530;
+  --nc-green-soft: #eef8ea;
+  --nc-green-soft-2: #e7f4e3;
+  --nc-text: #0f1f2e;
+  --nc-muted: #637083;
+  --nc-line: #e7ebef;
+  --nc-bg: #fbfcfb;
+  --nc-card-shadow: 0 14px 36px rgba(15, 31, 46, 0.06);
+}
+
+body.nucoco-admin {
+  background: var(--nc-bg) !important;
+  color: var(--nc-text);
+}
+
+.nucoco-admin .container-fluid {
+  padding: 0;
+}
+
+.nucoco-admin .main-content {
+  min-height: 100vh;
+  margin-left: 278px;
+  padding: 98px 40px 32px;
+  background: var(--nc-bg);
+}
+
+.nucoco-admin .admin-topbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 278px;
+  z-index: 20;
+  height: 78px;
+  margin: 0 !important;
+  padding: 0 36px;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.92);
+  border: 0 !important;
+  border-bottom: 1px solid var(--nc-line) !important;
+  border-radius: 0 !important;
+  box-shadow: 0 10px 30px rgba(15, 31, 46, 0.03);
+  backdrop-filter: blur(10px);
+}
+
+.nucoco-admin .header-burger-menu,
+.nucoco-admin .admin-notification,
+.nucoco-admin .admin-profile-btn {
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--nc-text);
+  background: transparent !important;
+  border-radius: 10px;
+}
+
+.nucoco-admin .admin-notification .count {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: #ef4444;
+  color: #fff;
+  font-size: 10px;
+  line-height: 17px;
+  text-align: center;
+}
+
+.nucoco-admin .admin-profile-btn {
+  border: 0;
+  padding: 0;
+}
+
+.nucoco-admin .admin-profile-btn img {
+  width: 38px;
+  height: 38px;
+}
+
+.nucoco-admin .admin-sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: 278px;
+  height: 100vh;
+  padding: 18px 18px;
+  background: #fff;
+  border-right: 1px solid var(--nc-line);
+  box-shadow: none;
+  z-index: 30;
+}
+
+.nucoco-admin .admin-sidebar-logo {
+  height: 56px;
+  margin: 0 0 14px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nucoco-admin .admin-sidebar-logo img {
+  width: 168px;
+  max-height: 54px;
+  object-fit: contain;
+}
+
+.nucoco-admin .sidebar-burger-menu-close {
+  display: none;
+  color: var(--nc-text);
+}
+
+.nucoco-admin .layout-menu {
+  height: calc(100vh - 176px);
+  background: transparent;
+}
+
+.nucoco-admin .menu-inner {
+  gap: 1px;
+  padding: 0;
+}
+
+.nucoco-admin .menu-title {
+  margin: 11px 12px 5px !important;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--nc-muted);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  list-style: none;
+}
+
+.nucoco-admin .menu-title::before {
+  content: "";
+  width: 18px;
+  height: 1px;
+  background: #aeb7c7;
+}
+
+.nucoco-admin .menu-vertical .menu-inner > .menu-item,
+.nucoco-admin .menu-item {
+  width: 100%;
+  margin: 0 0 2px !important;
+  padding: 0 !important;
+}
+
+.nucoco-admin .menu-vertical .menu-item .menu-link,
+.nucoco-admin .menu-link {
+  min-height: 38px !important;
+  height: 38px;
+  width: 100%;
+  margin: 0 !important;
+  padding: 0 13px !important;
+  border-radius: 8px;
+  color: #1f2937;
+  font-size: 14px !important;
+  line-height: 38px !important;
+  font-weight: 500;
+  gap: 9px;
+}
+
+.nucoco-admin .menu-link:hover {
+  background: #f5faf3;
+  color: var(--nc-green);
+}
+
+.nucoco-admin .menu-link.active {
+  background: linear-gradient(90deg, var(--nc-green-soft), #f5fbf2);
+  color: var(--nc-green);
+  font-weight: 700;
+}
+
+.nucoco-admin .menu-icon {
+  width: 21px !important;
+  margin: 0 !important;
+  color: currentColor;
+  font-size: 19px !important;
+  line-height: 1 !important;
+}
+
+.nucoco-admin .menu-link .title {
+  line-height: 1.2 !important;
+}
+
+body.nucoco-admin .sidebar-area.admin-sidebar #layout-menu.menu-vertical .menu-inner {
+  padding: 0 !important;
+  padding-right: 0 !important;
+  gap: 0 !important;
+}
+
+body.nucoco-admin .sidebar-area.admin-sidebar #layout-menu.menu-vertical .menu-inner > li.menu-title {
+  min-height: 24px !important;
+  margin: 10px 12px 4px !important;
+  padding: 0 !important;
+}
+
+body.nucoco-admin .sidebar-area.admin-sidebar #layout-menu.menu-vertical .menu-inner > li.menu-item {
+  min-height: 0 !important;
+  height: 38px !important;
+  margin: 0 0 3px !important;
+  padding: 0 !important;
+}
+
+body.nucoco-admin .sidebar-area.admin-sidebar #layout-menu.menu-vertical .menu-inner > li.menu-item > a.menu-link {
+  min-height: 38px !important;
+  height: 38px !important;
+  margin: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+body.nucoco-admin .sidebar-area.admin-sidebar #layout-menu.menu-vertical .menu-inner > li.menu-item.open {
+  margin-bottom: 3px !important;
+}
+
+.nucoco-admin .admin-sidebar-user {
+  position: absolute;
+  right: 18px;
+  bottom: 14px;
+  left: 18px;
+  min-height: 62px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(135deg, #f8fbf7, #eef8ea);
+  border-radius: 10px;
+}
+
+.nucoco-admin .admin-sidebar-user img {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+}
+
+.nucoco-admin .admin-sidebar-user strong,
+.nucoco-admin .admin-sidebar-user span {
+  display: block;
+}
+
+.nucoco-admin .admin-sidebar-user strong {
+  color: var(--nc-text);
+  font-size: 14px;
+}
+
+.nucoco-admin .admin-sidebar-user span {
+  color: var(--nc-muted);
+  font-size: 12px;
+}
+
+.nucoco-admin .admin-sidebar-user a {
+  margin-left: auto;
+  color: var(--nc-text);
+}
+
+body.nucoco-admin[sidebar-data-theme="sidebar-hide"] .admin-sidebar {
+  transform: translateX(-100%);
+}
+
+body.nucoco-admin[sidebar-data-theme="sidebar-hide"] .main-content {
+  margin-left: 0;
+}
+
+body.nucoco-admin[sidebar-data-theme="sidebar-hide"] .admin-topbar {
+  left: 0;
+}
+
+.nucoco-admin .main-content-container > .d-flex:first-child {
+  margin-bottom: 28px !important;
+}
+
+.nucoco-admin .main-content-container h3 {
+  color: var(--nc-text);
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.nucoco-admin .breadcrumb {
+  display: none;
+}
+
+.nucoco-admin .card {
+  border: 1px solid var(--nc-line) !important;
+  border-radius: 12px !important;
+  box-shadow: var(--nc-card-shadow);
+}
+
+.nucoco-admin .rounded-10 {
+  border-radius: 12px !important;
+}
+
+.nucoco-admin .p-20 {
+  padding: 20px !important;
+}
+
+.nucoco-admin .btn-primary {
+  background: linear-gradient(180deg, #26813a, #15752d) !important;
+  border-color: #15752d !important;
+  border-radius: 7px;
+  box-shadow: 0 8px 18px rgba(21, 128, 61, 0.18);
+}
+
+.nucoco-admin .btn-outline-primary {
+  color: var(--nc-green) !important;
+  border-color: #c8e7c7 !important;
+  border-radius: 7px;
+}
+
+.nucoco-admin .btn-outline-primary:hover {
+  color: #fff !important;
+  background: var(--nc-green) !important;
+}
+
+.nucoco-admin .text-primary {
+  color: var(--nc-green) !important;
+}
+
+.nucoco-admin .bg-primary {
+  background-color: var(--nc-green) !important;
+}
+
+.nucoco-admin .table-src-form .form-control,
+.nucoco-admin .src-form .form-control,
+.nucoco-admin .form-control,
+.nucoco-admin .form-select {
+  border-color: #d7dee6;
+  border-radius: 7px;
+  min-height: 44px;
+  color: var(--nc-text);
+  background-color: #fff;
+  font-size: 14px;
+  box-shadow: none !important;
+}
+
+.nucoco-admin .form-control:focus,
+.nucoco-admin .form-select:focus {
+  border-color: #77bf7b;
+  box-shadow: 0 0 0 3px rgba(21, 128, 61, 0.08) !important;
+}
+
+.nucoco-admin textarea.form-control {
+  min-height: 112px;
+  padding-top: 12px;
+  resize: vertical;
+}
+
+.nucoco-admin .label,
+.nucoco-admin label {
+  color: #34435a;
+  font-size: 13px !important;
+  font-weight: 600;
+}
+
+.nucoco-admin label .text-danger,
+.nucoco-admin label.required::after {
+  color: #ef4444;
+}
+
+.nucoco-admin .form-floating > .form-control,
+.nucoco-admin .form-floating > .form-select {
+  height: 44px;
+  min-height: 44px;
+  padding-top: 12px;
+  padding-bottom: 8px;
+}
+
+.nucoco-admin .form-floating > label {
+  padding-top: 10px;
+  color: var(--nc-muted);
+}
+
+.nucoco-admin form.card,
+.nucoco-admin .form-card,
+.nucoco-admin .admin-form-card {
+  padding: 24px !important;
+  background: #fff;
+  border: 1px solid var(--nc-line) !important;
+  border-radius: 12px !important;
+  box-shadow: var(--nc-card-shadow);
+}
+
+.nucoco-admin .form-section-title {
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--nc-text);
+}
+
+.nucoco-admin .form-section-title .material-symbols-outlined {
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  color: var(--nc-green);
+  background: var(--nc-green-soft);
+  font-size: 19px;
+}
+
+.nucoco-admin .form-section-title h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.nucoco-admin .form-page-head {
+  margin-bottom: 22px;
+}
+
+.nucoco-admin .form-back-btn {
+  min-height: 40px;
+  padding: 0 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--nc-text) !important;
+  background: #fff;
+  border: 1px solid #d8e0e8;
+  border-radius: 7px;
+  font-weight: 700;
+}
+
+.nucoco-admin .form-back-btn .material-symbols-outlined {
+  font-size: 18px;
+}
+
+.nucoco-admin .form-top-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+
+.nucoco-admin .form-title-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 14px;
+}
+
+.nucoco-admin .form-title-row h3 {
+  margin: 0;
+}
+
+.nucoco-admin .form-title-badge {
+  padding: 7px 14px;
+  border-radius: 8px;
+  color: var(--nc-green);
+  background: var(--nc-green-soft);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.nucoco-admin .form-title-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+}
+
+.nucoco-admin .form-title-actions .btn {
+  min-width: 116px;
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 7px;
+  font-weight: 700;
+}
+
+.nucoco-admin .form-actions {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+}
+
+.nucoco-admin .form-actions .btn,
+.nucoco-admin form.card > .btn,
+.nucoco-admin form.card button[type="submit"] {
+  min-width: 136px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 7px;
+  font-weight: 700;
+}
+
+.nucoco-admin .btn-danger {
+  color: #0f1f2e !important;
+  background: #fff !important;
+  border-color: #d8e0e8 !important;
+  box-shadow: none !important;
+}
+
+.nucoco-admin .admin-form .table thead th {
+  padding: 14px 18px !important;
+  font-size: 13px;
+}
+
+.nucoco-admin .admin-form .table tbody td {
+  padding: 10px 18px !important;
+}
+
+.nucoco-admin .admin-form .table .form-control,
+.nucoco-admin .admin-form .table .form-select {
+  min-height: 38px;
+  font-size: 13px;
+}
+
+.nucoco-admin .admin-form .table .qty-input {
+  min-width: 96px;
+  text-align: center;
+}
+
+.nucoco-admin .admin-form .table .money-input {
+  min-width: 150px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.nucoco-admin .admin-form .table-responsive {
+  border: 1px solid var(--nc-line);
+  border-radius: 10px;
+}
+
+.nucoco-admin .add-item-btn {
+  min-height: 38px;
+  padding: 0 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--nc-green);
+  background: #fff;
+  border: 1px solid #8bd18f;
+  border-radius: 7px;
+  font-weight: 700;
+}
+
+.nucoco-admin .add-item-btn .material-symbols-outlined,
+.nucoco-admin .item-row-btn .material-symbols-outlined {
+  font-size: 18px;
+}
+
+.nucoco-admin .item-row-btn {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #ef4444;
+  background: #fff;
+  border: 1px solid #fecaca;
+  border-radius: 7px;
+}
+
+.nucoco-admin .table-src-form .form-control {
+  padding-left: 46px;
+}
+
+.nucoco-admin .table-src-form .src-btn {
+  left: 16px !important;
+  color: var(--nc-muted);
+}
+
+.nucoco-admin .default-table-area,
+.nucoco-admin .table-responsive {
+  border-radius: 12px;
+}
+
+.nucoco-admin .table {
+  margin-bottom: 0;
+  color: var(--nc-text);
+}
+
+.nucoco-admin .table thead th {
+  padding: 22px 24px !important;
+  background: #fff;
+  border-bottom: 1px solid var(--nc-line);
+  color: var(--nc-text);
+  font-size: 14px;
+  font-weight: 800 !important;
+  white-space: nowrap;
+}
+
+.nucoco-admin .table tbody td {
+  padding: 20px 24px !important;
+  border-bottom: 1px solid var(--nc-line);
+  color: #1f2937;
+  vertical-align: middle;
+}
+
+.nucoco-admin .table tbody tr:hover {
+  background: #fbfdfb;
+}
+
+.nucoco-admin .table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.nucoco-admin .table a.text-primary {
+  color: var(--nc-green) !important;
+  font-weight: 700;
+}
+
+.nucoco-admin .badge {
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.nucoco-admin .badge.bg-success {
+  color: var(--nc-green) !important;
+  background: #e7f7e8 !important;
+}
+
+.nucoco-admin .badge.bg-warning {
+  color: #d97706 !important;
+  background: #fff3d8 !important;
+}
+
+.nucoco-admin .badge.bg-secondary {
+  color: #64748b !important;
+  background: #eef2f7 !important;
+}
+
+.nucoco-admin .footer-area {
+  margin-top: auto;
+  background: transparent !important;
+  box-shadow: none;
+}
+
+.nucoco-admin .detail-page-head {
+  margin-bottom: 22px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.nucoco-admin .detail-breadcrumb {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--nc-muted);
+  font-size: 15px;
+}
+
+.nucoco-admin .detail-breadcrumb a {
+  color: var(--nc-green);
+  text-decoration: none;
+}
+
+.nucoco-admin .detail-breadcrumb .material-symbols-outlined {
+  font-size: 18px;
+}
+
+.nucoco-admin .detail-title-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.nucoco-admin .detail-title-row h3 {
+  margin: 0;
+  color: var(--nc-text);
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.nucoco-admin .detail-title-badge {
+  padding: 7px 14px;
+  border-radius: 8px;
+  color: var(--nc-green);
+  background: var(--nc-green-soft);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.nucoco-admin .detail-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.nucoco-admin .detail-btn {
+  min-height: 46px;
+  padding: 0 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 8px;
+  font-weight: 700;
+}
+
+.nucoco-admin .detail-btn .material-symbols-outlined {
+  font-size: 20px;
+}
+
+.nucoco-admin .detail-btn-primary {
+  color: #fff !important;
+  background: linear-gradient(180deg, #228a3a, #11732d);
+  border: 1px solid #11732d;
+  box-shadow: 0 10px 20px rgba(21, 128, 61, 0.18);
+}
+
+.nucoco-admin .detail-btn-outline {
+  color: var(--nc-text) !important;
+  background: #fff;
+  border: 1px solid #d8e0e8;
+}
+
+.nucoco-admin .detail-btn-outline-success {
+  color: var(--nc-green) !important;
+  background: #fff;
+  border: 1px solid var(--nc-green);
+}
+
+.nucoco-admin .detail-btn-danger {
+  color: #dc2626 !important;
+  background: #fff;
+  border: 1px solid #fecaca;
+}
+
+.nucoco-admin .detail-summary-card,
+.nucoco-admin .detail-card {
+  margin-bottom: 20px;
+  background: #fff;
+  border: 1px solid var(--nc-line);
+  border-radius: 12px;
+  box-shadow: var(--nc-card-shadow);
+}
+
+.nucoco-admin .detail-summary-item {
+  min-height: 116px;
+  padding: 22px 26px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-right: 1px solid var(--nc-line);
+}
+
+.nucoco-admin .row > div:last-child .detail-summary-item {
+  border-right: 0;
+}
+
+.nucoco-admin .detail-summary-icon,
+.nucoco-admin .detail-card-title > span {
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  border-radius: 9px;
+  color: var(--nc-green);
+  background: var(--nc-green-soft);
+  font-size: 21px;
+}
+
+.nucoco-admin .detail-summary-label {
+  display: block;
+  color: var(--nc-muted);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.nucoco-admin .detail-summary-item strong {
+  display: block;
+  margin-top: 5px;
+  color: var(--nc-text);
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.nucoco-admin .detail-summary-item small {
+  display: block;
+  margin-top: 4px;
+  color: var(--nc-muted);
+}
+
+.nucoco-admin .detail-summary-item a {
+  margin-top: 7px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--nc-green);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.nucoco-admin .detail-summary-item a .material-symbols-outlined {
+  font-size: 15px;
+}
+
+.nucoco-admin .detail-card {
+  padding: 24px;
+}
+
+.nucoco-admin .detail-card-title {
+  margin-bottom: 22px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nucoco-admin .detail-card-title h4 {
+  margin: 0;
+  color: var(--nc-text);
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.nucoco-admin .detail-fields {
+  display: grid;
+  gap: 14px;
+}
+
+.nucoco-admin .detail-field {
+  display: grid;
+  grid-template-columns: 210px 1fr;
+  gap: 16px;
+  color: var(--nc-muted);
+  line-height: 1.6;
+}
+
+.nucoco-admin .detail-field strong {
+  color: var(--nc-text);
+  font-weight: 500;
+}
+
+.nucoco-admin .detail-body-text {
+  color: var(--nc-text);
+  line-height: 1.8;
+}
+
+.nucoco-admin .detail-media {
+  width: 100%;
+  max-height: 260px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid var(--nc-line);
+}
+
+.nucoco-admin .detail-total-bar {
+  margin-top: 12px;
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-radius: 8px;
+  color: var(--nc-green);
+  background: linear-gradient(90deg, var(--nc-green-soft), #fbfff8);
+  font-weight: 800;
+}
+
+.nucoco-admin .detail-total-bar strong {
+  font-size: 22px;
+}
+
+.nucoco-admin .detail-badge {
+  min-width: 86px;
+  padding: 9px 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-weight: 700;
+}
+
+.nucoco-admin .detail-badge-success {
+  color: var(--nc-green);
+  background: #e7f7e8;
+}
+
+.nucoco-admin .detail-badge-warning {
+  color: #d97706;
+  background: #fff3d8;
+}
+
+.nucoco-admin .detail-badge-danger {
+  color: #dc2626;
+  background: #fee2e2;
+}
+
+.nucoco-admin .detail-badge-muted {
+  color: #64748b;
+  background: #eef2f7;
+}
+
+.nucoco-admin .detail-doc-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.nucoco-admin .dashboard-sales {
+  color: #101828;
+}
+
+.nucoco-admin .dash-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding-bottom: 18px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid #e7edf3;
+}
+
+.nucoco-admin .dash-hero h3 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.nucoco-admin .dash-hero p {
+  margin: 0;
+  color: #536276;
+}
+
+.nucoco-admin .dash-range {
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 18px;
+  border: 1px solid #dce4ed;
+  border-radius: 8px;
+  background: #fff;
+  color: #142235;
+  font-weight: 600;
+}
+
+.nucoco-admin .dash-range .material-symbols-outlined {
+  color: #536276;
+  font-size: 21px;
+}
+
+.nucoco-admin .dash-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.nucoco-admin .dash-kpi-card,
+.nucoco-admin .dash-panel {
+  border: 1px solid #e4ebf1;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 10px 28px rgba(16, 24, 40, 0.04);
+}
+
+.nucoco-admin .dash-kpi-card {
+  min-height: 116px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+}
+
+.nucoco-admin .dash-kpi-icon {
+  width: 56px;
+  height: 56px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  border-radius: 50%;
+}
+
+.nucoco-admin .dash-kpi-icon .material-symbols-outlined {
+  font-size: 28px;
+}
+
+.nucoco-admin .dash-kpi-icon.green { color: #118319; background: #dff3db; }
+.nucoco-admin .dash-kpi-icon.blue { color: #1675d1; background: #e0f1ff; }
+.nucoco-admin .dash-kpi-icon.yellow { color: #d98a00; background: #fff0c9; }
+.nucoco-admin .dash-kpi-icon.purple { color: #7c3aed; background: #efe4ff; }
+.nucoco-admin .dash-kpi-icon.red { color: #e03131; background: #ffe1e1; }
+
+.nucoco-admin .dash-kpi-card p {
+  margin: 0 0 7px;
+  color: #233044;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.nucoco-admin .dash-kpi-card strong {
+  display: block;
+  margin-bottom: 10px;
+  color: #071426;
+  font-size: 21px;
+  line-height: 1.1;
+}
+
+.nucoco-admin .dash-kpi-card small {
+  color: #536276;
+  font-size: 12px;
+}
+
+.nucoco-admin .dash-kpi-card small.up { color: #078522; }
+.nucoco-admin .dash-kpi-card small.down { color: #e03131; }
+
+.nucoco-admin .dash-panel {
+  height: 100%;
+  padding: 20px;
+}
+
+.nucoco-admin .dash-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.nucoco-admin .dash-panel-head h4 {
+  margin: 0;
+  color: #111d2d;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.nucoco-admin .dash-panel-head span {
+  color: #536276;
+  font-size: 13px;
+}
+
+.nucoco-admin .dash-line-chart {
+  width: 100%;
+  min-height: 270px;
+  display: block;
+}
+
+.nucoco-admin .grid-line { stroke: #e8eef3; stroke-width: 1; }
+.nucoco-admin .axis-label { fill: #3f4d5f; font-size: 12px; }
+.nucoco-admin .area-fill { fill: rgba(40, 154, 24, 0.13); }
+.nucoco-admin .trend-line { fill: none; stroke: #208717; stroke-width: 2.5; }
+.nucoco-admin .trend-dot { fill: #208717; stroke: #fff; stroke-width: 2; }
+
+.nucoco-admin .dash-status-wrap {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.nucoco-admin .dash-donut {
+  width: 150px;
+  height: 150px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+}
+
+.nucoco-admin .dash-donut > div {
+  width: 72px;
+  height: 72px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #fff;
+  text-align: center;
+}
+
+.nucoco-admin .dash-donut span {
+  color: #536276;
+  font-size: 12px;
+}
+
+.nucoco-admin .dash-donut strong {
+  color: #071426;
+  font-size: 22px;
+}
+
+.nucoco-admin .dash-status-list {
+  display: grid;
+  gap: 12px;
+}
+
+.nucoco-admin .dash-status-list > div {
+  display: grid;
+  grid-template-columns: 12px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  color: #172337;
+  font-size: 14px;
+}
+
+.nucoco-admin .dash-status-list .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.nucoco-admin .dash-table thead th {
+  background: #f7f9fb;
+}
+
+.nucoco-admin .dash-status {
+  display: inline-flex;
+  min-width: 72px;
+  justify-content: center;
+  padding: 6px 10px;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.nucoco-admin .dash-status-muted { color: #344054; background: #eef1f5; }
+.nucoco-admin .dash-status-blue { color: #0d66c2; background: #e4f2ff; }
+.nucoco-admin .dash-status-green { color: #08751f; background: #e0f4dd; }
+.nucoco-admin .dash-status-red { color: #d92d20; background: #ffe3e3; }
+.nucoco-admin .dash-status-yellow { color: #a15c00; background: #fff0cc; }
+
+.nucoco-admin .dash-link-btn {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 0 14px;
+  border: 1px solid #c8dfca;
+  border-radius: 7px;
+  color: var(--nc-green);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.nucoco-admin .dash-link-btn .material-symbols-outlined {
+  font-size: 18px;
+}
+
+.nucoco-admin .dash-sales-bars {
+  display: grid;
+  gap: 16px;
+  margin: 14px 0 24px;
+}
+
+.nucoco-admin .dash-sales-row {
+  display: grid;
+  grid-template-columns: 96px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+}
+
+.nucoco-admin .dash-sales-row > span {
+  color: #172337;
+  font-weight: 600;
+}
+
+.nucoco-admin .dash-sales-row > div {
+  height: 22px;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #eef3ef;
+}
+
+.nucoco-admin .dash-sales-row i {
+  height: 100%;
+  display: block;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #55b51d, #269113);
+}
+
+.nucoco-admin .dash-sales-row strong {
+  color: #101828;
+  font-size: 13px;
+}
+
+@media (max-width: 1199.98px) {
+  .nucoco-admin .dash-kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .nucoco-admin .main-content {
+    margin-left: 0;
+    padding: 92px 18px 24px;
+  }
+
+  .nucoco-admin .admin-topbar {
+    left: 0;
+    padding: 0 18px;
+  }
+
+  .nucoco-admin .admin-sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+  }
+
+  .nucoco-admin .admin-sidebar.active {
+    transform: translateX(0);
+  }
+
+  body.nucoco-admin[sidebar-data-theme="sidebar-show"] .admin-sidebar {
+    transform: translateX(0);
+  }
+
+  .nucoco-admin .sidebar-burger-menu-close {
+    display: inline-flex;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .nucoco-admin .dash-hero {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .nucoco-admin .dash-range {
+    width: 100%;
+  }
+
+  .nucoco-admin .dash-kpi-grid,
+  .nucoco-admin .dash-status-wrap,
+  .nucoco-admin .dash-sales-row {
+    grid-template-columns: 1fr;
+  }
+
+  .nucoco-admin .dash-status-wrap {
+    justify-items: center;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .nucoco-admin .detail-page-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .nucoco-admin .detail-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .nucoco-admin .detail-btn {
+    flex: 1 1 auto;
+  }
+
+  .nucoco-admin .detail-summary-item {
+    min-height: auto;
+    border-right: 0;
+    border-bottom: 1px solid var(--nc-line);
+  }
+
+  .nucoco-admin .row > div:last-child .detail-summary-item {
+    border-bottom: 0;
+  }
+
+  .nucoco-admin .detail-field {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  .nucoco-admin .detail-total-bar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .nucoco-admin .form-title-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .nucoco-admin .form-title-actions {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .nucoco-admin .form-title-actions .btn {
+    flex: 1 1 auto;
+  }
+}
