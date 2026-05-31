@@ -1,6 +1,8 @@
-<!-- Start Main Content Area -->
 <?php
 $page = 'product';
+if (!headers_sent()) {
+    header('X-Nucoco-Admin-Page: product');
+}
 include __DIR__ . '/../includes/auth.php';
 include __DIR__ . '/../includes/header.php';
 include __DIR__ . '/../includes/sidebar.php';

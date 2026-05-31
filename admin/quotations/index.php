@@ -1,4 +1,10 @@
 <?php
+$request_path = parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH) ?: '';
+if (preg_match('#/admin/product(?:/|$)#', $request_path)) {
+    require dirname(__DIR__) . '/product/index.php';
+    exit;
+}
+
 $page = 'quotations';
 include __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../includes/db.php';
