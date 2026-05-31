@@ -228,7 +228,7 @@ $current_url = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
                                 <?php if (!empty($product['price']) && (float) $product['price'] > 0): ?>
                                     <div class="product-price">
-                                        <span>$<?= number_format((float) $product['price'], 2) ?></span>
+                                        <span><?= htmlspecialchars(product_format_price($product['price'], $product['language'] ?? $lang)) ?></span>
                                     </div>
                                 <?php endif; ?>
 
@@ -347,7 +347,7 @@ $current_url = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
                                                 <?php if (!empty($item['price']) && (float) $item['price'] > 0): ?>
                                                     <div class="product-price">
-                                                        <span>$<?= number_format((float) $item['price'], 2) ?></span>
+                                                        <span><?= htmlspecialchars(product_format_price($item['price'], $item['language'] ?? $lang)) ?></span>
                                                     </div>
                                                 <?php endif; ?>
                                             </div>

@@ -12,6 +12,10 @@ if (!function_exists('current_lang')) {
     require_once __DIR__ . '/../includes/helpers.php';
 }
 
+if (file_exists(__DIR__ . '/../admin/includes/helpers.php')) {
+    require_once __DIR__ . '/../admin/includes/helpers.php';
+}
+
 $is_en = current_lang() === 'en';
 $lang  = $is_en ? 'en' : 'id';
 
@@ -116,7 +120,7 @@ if ($category_stmt) {
                             $category_name = $cat['category'];
 
                             $stmt = mysqli_prepare($conn, "
-                                SELECT name, slug, image
+                                SELECT name, slug, image, price, language
                                 FROM products
                                 WHERE status = 'publish'
                                   AND language = ?
@@ -159,6 +163,11 @@ if ($category_stmt) {
                                                                 <?= htmlspecialchars($row['name']) ?>
                                                             </a>
                                                         </h2>
+                                                        <?php if (!empty($row['price']) && (float) $row['price'] > 0): ?>
+                                                            <div class="product-price">
+                                                                <span><?= htmlspecialchars(product_format_price($row['price'], $row['language'] ?? $lang)) ?></span>
+                                                            </div>
+                                                        <?php endif; ?>
                                                     </div>
 
                                                 </div>

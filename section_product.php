@@ -11,6 +11,10 @@ if (!function_exists('current_lang')) {
     require_once __DIR__ . '/includes/helpers.php';
 }
 
+if (file_exists(__DIR__ . '/admin/includes/helpers.php')) {
+    require_once __DIR__ . '/admin/includes/helpers.php';
+}
+
 $is_en = current_lang() === 'en';
 $lang  = $is_en ? 'en' : 'id';
 
@@ -137,7 +141,9 @@ if ($category_stmt) {
                                                             </h2>
 
                                                             <div class="product-price">
-                                                                <!-- <span>$<?= number_format((float)($row['price'] ?? 0), 2) ?></span> -->
+                                                                <?php if (!empty($row['price']) && (float) $row['price'] > 0): ?>
+                                                                    <span><?= htmlspecialchars(product_format_price($row['price'], $lang)) ?></span>
+                                                                <?php endif; ?>
                                                             </div>
                                                         </div>
                                                     </div>
