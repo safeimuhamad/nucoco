@@ -15,6 +15,7 @@ $default_permissions = [
     'webadmin.pages.manage' => ['name' => 'Pages', 'group' => 'Web Admin'],
     'webadmin.page_content.manage' => ['name' => 'Page Content', 'group' => 'Web Admin'],
     'webadmin.products.manage' => ['name' => 'Products', 'group' => 'Web Admin'],
+    'webadmin.product_categories.manage' => ['name' => 'Product Categories', 'group' => 'Web Admin'],
     'webadmin.services.manage' => ['name' => 'Services', 'group' => 'Web Admin'],
     'webadmin.news.manage' => ['name' => 'News', 'group' => 'Web Admin'],
     'webadmin.team.manage' => ['name' => 'Team', 'group' => 'Web Admin'],

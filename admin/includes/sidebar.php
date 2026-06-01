@@ -33,6 +33,7 @@
                         'pages' => ['title' => 'Pages', 'icon' => 'description', 'url' => 'pages/index.php', 'permission' => 'webadmin.pages.manage'],
                         'pages-content' => ['title' => 'Page Content', 'icon' => 'article', 'url' => 'pages-content/index.php', 'permission' => 'webadmin.page_content.manage'],
                         'product' => ['title' => 'Products', 'icon' => 'inventory_2', 'url' => 'product/index.php', 'permission' => 'webadmin.products.manage'],
+                        'product-categories' => ['title' => 'Product Categories', 'icon' => 'category', 'url' => 'product-categories/index.php', 'permission' => 'webadmin.product_categories.manage'],
                         'services' => ['title' => 'Services', 'icon' => 'support_agent', 'url' => 'services/index.php', 'permission' => 'webadmin.services.manage'],
                         'news' => ['title' => 'News', 'icon' => 'newspaper', 'url' => 'news/index.php', 'permission' => 'webadmin.news.manage'],
                         'team' => ['title' => 'Team', 'icon' => 'groups', 'url' => 'team/index.php', 'permission' => 'webadmin.team.manage'],

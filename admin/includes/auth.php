@@ -80,6 +80,7 @@ if (!function_exists('page_permission')) {
             'pages' => 'webadmin.pages.manage',
             'pages-content' => 'webadmin.page_content.manage',
             'product' => 'webadmin.products.manage',
+            'product-categories' => 'webadmin.product_categories.manage',
             'services' => 'webadmin.services.manage',
             'news' => 'webadmin.news.manage',
             'team' => 'webadmin.team.manage',

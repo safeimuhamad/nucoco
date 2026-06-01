@@ -1,11 +1,5 @@
--- Nucoco product category seed
--- Import this file if production_migration_erp_20260531.sql was already imported before product categories were added.
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+07:00";
-SET NAMES utf8mb4;
-
-START TRANSACTION;
+-- Product category master menu and access seed.
+-- Import this on production to ensure category master and menu access are available.
 
 CREATE TABLE IF NOT EXISTS `product_categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -37,5 +31,3 @@ INSERT INTO `user_access` (`role_key`, `permission_key`, `permission_name`, `all
 ('sales','webadmin.product_categories.manage','Product Categories',0)
 ON DUPLICATE KEY UPDATE
   `permission_name` = VALUES(`permission_name`);
-
-COMMIT;
