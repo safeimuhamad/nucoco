@@ -13,7 +13,7 @@ if (!$lead) {
 $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require_csrf_token();
-    foreach (['name','email','phone','company','source','interest_type','message','status'] as $key) {
+    foreach (['name','email','phone','company','address','source','interest_type','message','status'] as $key) {
         $lead[$key] = trim($_POST[$key] ?? '');
     }
 
@@ -23,9 +23,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = 'Invalid email.';
     } else {
         db_update(
-            "UPDATE leads SET name=?, email=?, phone=?, company=?, source=?, interest_type=?, message=?, status=?, updated_by=? WHERE id=?",
-            'ssssssssii',
-            [$lead['name'], $lead['email'], $lead['phone'], $lead['company'], $lead['source'], $lead['interest_type'], $lead['message'], $lead['status'], (int) current_user_id(), $id]
+            "UPDATE leads SET name=?, email=?, phone=?, company=?, address=?, source=?, interest_type=?, message=?, status=?, updated_by=? WHERE id=?",
+            'sssssssssii',
+            [$lead['name'], $lead['email'], $lead['phone'], $lead['company'], $lead['address'], $lead['source'], $lead['interest_type'], $lead['message'], $lead['status'], (int) current_user_id(), $id]
         );
         header('Location: ' . admin_url('leads/detail.php?id=' . $id . '&success=updated'));
         exit;

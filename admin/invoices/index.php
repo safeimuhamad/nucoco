@@ -17,19 +17,19 @@ if ($search !== '') {
     $row = db_select_one(
         "SELECT COUNT(*) AS total FROM invoices i
          LEFT JOIN quotations q ON q.id = i.quotation_id
-         WHERE i.invoice_number LIKE ? OR i.customer_name LIKE ? OR i.customer_email LIKE ? OR q.quote_number LIKE ?",
-        'ssss',
-        [$search_like, $search_like, $search_like, $search_like]
+         WHERE i.invoice_number LIKE ? OR i.customer_name LIKE ? OR i.customer_email LIKE ? OR i.customer_address LIKE ? OR q.quote_number LIKE ?",
+        'sssss',
+        [$search_like, $search_like, $search_like, $search_like, $search_like]
     );
     $total_data = (int) ($row['total'] ?? 0);
     $pagination = admin_pagination_meta($total_data, $page_num, $limit);
     $invoices = db_select_all(
         "SELECT i.*, q.quote_number FROM invoices i
          LEFT JOIN quotations q ON q.id = i.quotation_id
-         WHERE i.invoice_number LIKE ? OR i.customer_name LIKE ? OR i.customer_email LIKE ? OR q.quote_number LIKE ?
+         WHERE i.invoice_number LIKE ? OR i.customer_name LIKE ? OR i.customer_email LIKE ? OR i.customer_address LIKE ? OR q.quote_number LIKE ?
          ORDER BY i.id DESC LIMIT ?, ?",
-        'ssssii',
-        [$search_like, $search_like, $search_like, $search_like, $pagination['offset'], $pagination['limit']]
+        'sssssii',
+        [$search_like, $search_like, $search_like, $search_like, $search_like, $pagination['offset'], $pagination['limit']]
     );
 } else {
     $row = db_select_one("SELECT COUNT(*) AS total FROM invoices");
@@ -72,6 +72,7 @@ if ($search !== '') {
                     <tr>
                         <th>Invoice No.</th>
                         <th>Customer</th>
+                        <th>Address</th>
                         <th>Quotation</th>
                         <th>Status</th>
                         <th>Total</th>
@@ -90,13 +91,14 @@ if ($search !== '') {
                                 <?= htmlspecialchars($invoice['customer_name']) ?><br>
                                 <span class="text-secondary"><?= htmlspecialchars($invoice['customer_email'] ?: '-') ?></span>
                             </td>
+                            <td><?= nl2br(htmlspecialchars($invoice['customer_address'] ?: '-')) ?></td>
                             <td><?= htmlspecialchars($invoice['quote_number'] ?: '-') ?></td>
                             <td><span class="<?= detail_badge_class($invoice['status']) ?>"><?= htmlspecialchars(invoice_status_label($invoice['status'])) ?></span></td>
                             <td><?= quotation_format_money($invoice['grand_total'], $invoice['currency']) ?></td>
                             <td><?= htmlspecialchars($invoice['due_date'] ?: '-') ?></td>
                         </tr>
                     <?php endforeach; else: ?>
-                        <tr><td colspan="6" class="text-center py-4">No invoice found.</td></tr>
+                        <tr><td colspan="7" class="text-center py-4">No invoice found.</td></tr>
                     <?php endif; ?>
                 </tbody>
             </table>

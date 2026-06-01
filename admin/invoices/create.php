@@ -31,6 +31,7 @@ $invoice = [
     'customer_email' => $_POST['customer_email'] ?? $source_quote['customer_email'],
     'customer_phone' => $_POST['customer_phone'] ?? $source_quote['customer_phone'],
     'customer_company' => $_POST['customer_company'] ?? $source_quote['customer_company'],
+    'customer_address' => $_POST['customer_address'] ?? ($source_quote['customer_address'] ?? ''),
     'currency' => $_POST['currency'] ?? $source_quote['currency'],
     'status' => $_POST['status'] ?? 'draft',
     'invoice_date' => $_POST['invoice_date'] ?? date('Y-m-d'),
@@ -54,6 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $invoice['customer_name'] = trim($invoice['customer_name']);
     $invoice['customer_email'] = trim($invoice['customer_email']);
+    $invoice['customer_address'] = trim($invoice['customer_address'] ?? '');
     $allowed_status = ['draft', 'sent', 'paid', 'overdue', 'cancelled'];
 
     if ($invoice['customer_name'] === '') {
@@ -66,9 +68,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $invoice_number = invoice_next_number($conn);
         $invoice_id = db_insert(
             "INSERT INTO invoices
-             (invoice_number, quotation_id, lead_id, customer_name, customer_email, customer_phone, customer_company, currency, status, invoice_date, due_date, bank_account_number, bank_account_name, bank_branch, notes, discount, tax, created_by)
-             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-            'siissssssssssssddi',
+             (invoice_number, quotation_id, lead_id, customer_name, customer_email, customer_phone, customer_company, customer_address, currency, status, invoice_date, due_date, bank_account_number, bank_account_name, bank_branch, notes, discount, tax, created_by)
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            'siisssssssssssssddi',
             [
                 $invoice_number,
                 $quotation_id,
@@ -77,6 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $invoice['customer_email'],
                 trim($invoice['customer_phone'] ?? ''),
                 trim($invoice['customer_company'] ?? ''),
+                $invoice['customer_address'],
                 $invoice['currency'],
                 $invoice['status'],
                 $invoice['invoice_date'] ?: null,

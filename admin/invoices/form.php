@@ -61,6 +61,10 @@
                     <label class="label fs-16 mb-2">Company</label>
                     <input type="text" name="customer_company" class="form-control" value="<?= htmlspecialchars($invoice['customer_company'] ?? '') ?>">
                 </div>
+                <div class="col-lg-6 col-md-12 mb-20">
+                    <label class="label fs-16 mb-2">Address</label>
+                    <textarea name="customer_address" class="form-control" rows="3"><?= htmlspecialchars($invoice['customer_address'] ?? '') ?></textarea>
+                </div>
                 <div class="col-lg-3 col-md-6 mb-20">
                     <label class="label fs-16 mb-2">Status</label>
                     <select name="status" class="form-select">

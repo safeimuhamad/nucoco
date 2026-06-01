@@ -29,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $invoice['customer_email'] = trim($_POST['customer_email'] ?? '');
     $invoice['customer_phone'] = trim($_POST['customer_phone'] ?? '');
     $invoice['customer_company'] = trim($_POST['customer_company'] ?? '');
+    $invoice['customer_address'] = trim($_POST['customer_address'] ?? '');
     $invoice['currency'] = trim($_POST['currency'] ?? $invoice['currency']);
     $invoice['status'] = $_POST['status'] ?? 'draft';
     $invoice['invoice_date'] = $_POST['invoice_date'] ?? null;
@@ -50,14 +51,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         db_update(
             "UPDATE invoices
-             SET customer_name = ?, customer_email = ?, customer_phone = ?, customer_company = ?, currency = ?, status = ?, invoice_date = ?, due_date = ?, bank_account_number = ?, bank_account_name = ?, bank_branch = ?, notes = ?, discount = ?, tax = ?, updated_by = ?
+             SET customer_name = ?, customer_email = ?, customer_phone = ?, customer_company = ?, customer_address = ?, currency = ?, status = ?, invoice_date = ?, due_date = ?, bank_account_number = ?, bank_account_name = ?, bank_branch = ?, notes = ?, discount = ?, tax = ?, updated_by = ?
              WHERE id = ?",
-            'ssssssssssssddii',
+            'sssssssssssssddii',
             [
                 $invoice['customer_name'],
                 $invoice['customer_email'],
                 $invoice['customer_phone'],
                 $invoice['customer_company'],
+                $invoice['customer_address'],
                 $invoice['currency'],
                 $invoice['status'],
                 $invoice['invoice_date'] ?: null,

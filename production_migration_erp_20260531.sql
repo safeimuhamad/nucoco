@@ -67,6 +67,7 @@ CREATE TABLE IF NOT EXISTS `leads` (
   `email` varchar(150) DEFAULT NULL,
   `phone` varchar(50) DEFAULT NULL,
   `company` varchar(150) DEFAULT NULL,
+  `address` text DEFAULT NULL,
   `source` varchar(50) NOT NULL DEFAULT 'manual',
   `interest_type` varchar(100) DEFAULT NULL,
   `message` text DEFAULT NULL,
@@ -80,6 +81,9 @@ CREATE TABLE IF NOT EXISTS `leads` (
   KEY `idx_email` (`email`),
   KEY `idx_status` (`status`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE `leads`
+    ADD COLUMN IF NOT EXISTS `address` text DEFAULT NULL AFTER `company`;
 
 -- --------------------------------------------------------
 -- Quotations
@@ -95,6 +99,7 @@ CREATE TABLE IF NOT EXISTS `quotations` (
   `customer_email` varchar(150) DEFAULT NULL,
   `customer_phone` varchar(50) DEFAULT NULL,
   `customer_company` varchar(150) DEFAULT NULL,
+  `customer_address` text DEFAULT NULL,
   `currency` varchar(10) NOT NULL DEFAULT 'IDR',
   `status` enum('draft','sent','accepted','rejected','cancelled') NOT NULL DEFAULT 'draft',
   `valid_until` date DEFAULT NULL,
@@ -114,6 +119,9 @@ CREATE TABLE IF NOT EXISTS `quotations` (
   KEY `idx_status` (`status`),
   KEY `idx_quote_type` (`quote_type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE `quotations`
+    ADD COLUMN IF NOT EXISTS `customer_address` text DEFAULT NULL AFTER `customer_company`;
 
 CREATE TABLE IF NOT EXISTS `quotation_items` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -146,6 +154,7 @@ CREATE TABLE IF NOT EXISTS `invoices` (
   `customer_email` varchar(150) DEFAULT NULL,
   `customer_phone` varchar(50) DEFAULT NULL,
   `customer_company` varchar(150) DEFAULT NULL,
+  `customer_address` text DEFAULT NULL,
   `currency` varchar(10) NOT NULL DEFAULT 'IDR',
   `status` enum('draft','sent','paid','overdue','cancelled') NOT NULL DEFAULT 'draft',
   `invoice_date` date DEFAULT NULL,
@@ -168,6 +177,9 @@ CREATE TABLE IF NOT EXISTS `invoices` (
   KEY `idx_invoices_lead_id` (`lead_id`),
   KEY `idx_invoices_status` (`status`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE `invoices`
+    ADD COLUMN IF NOT EXISTS `customer_address` text DEFAULT NULL AFTER `customer_company`;
 
 CREATE TABLE IF NOT EXISTS `invoice_items` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

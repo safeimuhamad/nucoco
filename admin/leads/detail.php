@@ -37,6 +37,7 @@ include __DIR__ . '/../includes/sidebar.php';
                     'Email' => detail_text($lead['email']),
                     'Phone' => detail_text($lead['phone']),
                     'Company' => detail_text($lead['company']),
+                    'Address' => nl2br(detail_text($lead['address'] ?? '')),
                     'Status' => '<span class="' . detail_badge_class($lead['status']) . '">' . detail_text(ucfirst($lead['status'])) . '</span>',
                 ]); ?>
                 <hr>

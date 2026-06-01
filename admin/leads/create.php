@@ -4,7 +4,7 @@ include __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../includes/db.php';
 
 $error = '';
-$lead = ['name'=>'','email'=>'','phone'=>'','company'=>'','source'=>'manual','interest_type'=>'','message'=>'','status'=>'new'];
+$lead = ['name'=>'','email'=>'','phone'=>'','company'=>'','address'=>'','source'=>'manual','interest_type'=>'','message'=>'','status'=>'new'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require_csrf_token();
@@ -18,10 +18,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = 'Invalid email.';
     } else {
         $id = db_insert(
-            "INSERT INTO leads (name, email, phone, company, source, interest_type, message, status, created_by)
-             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-            'ssssssssi',
-            [$lead['name'], $lead['email'], $lead['phone'], $lead['company'], $lead['source'], $lead['interest_type'], $lead['message'], $lead['status'], (int) current_user_id()]
+            "INSERT INTO leads (name, email, phone, company, address, source, interest_type, message, status, created_by)
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            'sssssssssi',
+            [$lead['name'], $lead['email'], $lead['phone'], $lead['company'], $lead['address'], $lead['source'], $lead['interest_type'], $lead['message'], $lead['status'], (int) current_user_id()]
         );
         header('Location: ' . admin_url('leads/detail.php?id=' . $id . '&success=created'));
         exit;

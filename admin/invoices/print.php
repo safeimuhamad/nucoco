@@ -176,6 +176,9 @@ $amount_words = $currency === 'IDR'
                 <div class="section-label">BILL TO:</div>
                 <h2><?= htmlspecialchars($invoice['customer_name']) ?></h2>
                 <div><?= htmlspecialchars($invoice['customer_company'] ?: '-') ?></div>
+                <?php if (!empty($invoice['customer_address'])): ?>
+                    <div><?= nl2br(htmlspecialchars($invoice['customer_address'])) ?></div>
+                <?php endif; ?>
                 <div class="contact-line"><span class="icon">☎</span><span><?= htmlspecialchars($invoice['customer_phone'] ?: '-') ?></span></div>
                 <div class="contact-line"><span class="icon">✉</span><span><?= htmlspecialchars($invoice['customer_email'] ?: '-') ?></span></div>
             </div>

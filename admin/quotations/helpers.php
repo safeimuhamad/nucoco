@@ -127,14 +127,15 @@ if (!function_exists('ensure_lead_from_inquiry')) {
         }
 
         return db_insert(
-            "INSERT INTO leads (inquiry_id, name, email, phone, source, interest_type, message, status, created_by)
-             VALUES (?, ?, ?, ?, 'inquiry', ?, ?, 'proposal', ?)",
-            'isssssi',
+            "INSERT INTO leads (inquiry_id, name, email, phone, address, source, interest_type, message, status, created_by)
+             VALUES (?, ?, ?, ?, ?, 'inquiry', ?, ?, 'proposal', ?)",
+            'issssssi',
             [
                 (int) $inquiry['id'],
                 $inquiry['name'] ?? '',
                 $inquiry['email'] ?? '',
                 $inquiry['phone'] ?? '',
+                $inquiry['address'] ?? '',
                 $inquiry['service_type'] ?? '',
                 $inquiry['message'] ?? '',
                 (int) $user_id,

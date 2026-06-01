@@ -56,6 +56,7 @@ include __DIR__ . '/../includes/sidebar.php';
                     'Bank Branch' => detail_text($invoice['bank_branch']),
                     'Sales Representative' => detail_text($sales_name),
                     'Customer Phone' => detail_text($invoice['customer_phone']),
+                    'Customer Address' => nl2br(detail_text($invoice['customer_address'] ?? '')),
                     'Notes' => nl2br(detail_text($invoice['notes'])),
                 ]); ?>
             <?php detail_card_close(); ?>

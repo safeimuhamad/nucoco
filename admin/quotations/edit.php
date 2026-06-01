@@ -29,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $customer_email = trim($_POST['customer_email'] ?? '');
     $customer_phone = trim($_POST['customer_phone'] ?? '');
     $customer_company = trim($_POST['customer_company'] ?? '');
+    $customer_address = trim($_POST['customer_address'] ?? '');
     $valid_until = $_POST['valid_until'] ?: null;
     $status = $_POST['status'] ?? 'draft';
     $notes = trim($_POST['notes'] ?? '');
@@ -45,10 +46,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         db_update(
             "UPDATE quotations
-             SET quote_type = ?, customer_name = ?, customer_email = ?, customer_phone = ?, customer_company = ?, currency = ?, status = ?, valid_until = ?, notes = ?, discount = ?, tax = ?, updated_by = ?
+             SET quote_type = ?, customer_name = ?, customer_email = ?, customer_phone = ?, customer_company = ?, customer_address = ?, currency = ?, status = ?, valid_until = ?, notes = ?, discount = ?, tax = ?, updated_by = ?
              WHERE id = ?",
-            'sssssssssddii',
-            [$quote_type, $customer_name, $customer_email, $customer_phone, $customer_company, $currency, $status, $valid_until, $notes, $discount, $tax, (int) current_user_id(), $id]
+            'ssssssssssddii',
+            [$quote_type, $customer_name, $customer_email, $customer_phone, $customer_company, $customer_address, $currency, $status, $valid_until, $notes, $discount, $tax, (int) current_user_id(), $id]
         );
 
         $subtotal = sync_quotation_items($id, normalize_quotation_items_from_post());
@@ -125,6 +126,10 @@ include __DIR__ . '/../includes/sidebar.php';
             <div class="col-lg-3 col-md-6 mb-20">
                 <label class="label fs-16 mb-2">Company</label>
                 <input type="text" name="customer_company" class="form-control" value="<?= htmlspecialchars($quote['customer_company']) ?>">
+            </div>
+            <div class="col-lg-6 col-md-12 mb-20">
+                <label class="label fs-16 mb-2">Address</label>
+                <textarea name="customer_address" class="form-control" rows="3"><?= htmlspecialchars($quote['customer_address'] ?? '') ?></textarea>
             </div>
             <div class="col-lg-3 col-md-6 mb-20">
                 <label class="label fs-16 mb-2">Notes</label>

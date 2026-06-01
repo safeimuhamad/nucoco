@@ -20,19 +20,19 @@ $limit = 10;
 
 if ($search !== '') {
     $row = db_select_one(
-        "SELECT COUNT(*) AS total FROM quotations WHERE quote_number LIKE ? OR customer_name LIKE ? OR customer_email LIKE ?",
-        'sss',
-        [$search_like, $search_like, $search_like]
+        "SELECT COUNT(*) AS total FROM quotations WHERE quote_number LIKE ? OR customer_name LIKE ? OR customer_email LIKE ? OR customer_address LIKE ?",
+        'ssss',
+        [$search_like, $search_like, $search_like, $search_like]
     );
     $total_data = (int) ($row['total'] ?? 0);
     $pagination = admin_pagination_meta($total_data, $page_num, $limit);
     $quotations = db_select_all(
         "SELECT * FROM quotations
-         WHERE quote_number LIKE ? OR customer_name LIKE ? OR customer_email LIKE ?
+         WHERE quote_number LIKE ? OR customer_name LIKE ? OR customer_email LIKE ? OR customer_address LIKE ?
          ORDER BY id DESC
          LIMIT ?, ?",
-        'sssii',
-        [$search_like, $search_like, $search_like, $pagination['offset'], $pagination['limit']]
+        'ssssii',
+        [$search_like, $search_like, $search_like, $search_like, $pagination['offset'], $pagination['limit']]
     );
 } else {
     $row = db_select_one("SELECT COUNT(*) AS total FROM quotations");
@@ -67,6 +67,7 @@ if ($search !== '') {
                     <tr>
                         <th>No</th>
                         <th>Customer</th>
+                        <th>Address</th>
                         <th>Type</th>
                         <th>Status</th>
                         <th>Total</th>
@@ -85,13 +86,14 @@ if ($search !== '') {
                                 <?= htmlspecialchars($quote['customer_name']) ?><br>
                                 <span class="text-secondary"><?= htmlspecialchars($quote['customer_email'] ?: '-') ?></span>
                             </td>
+                            <td><?= nl2br(htmlspecialchars($quote['customer_address'] ?: '-')) ?></td>
                             <td><?= htmlspecialchars(ucfirst($quote['quote_type'])) ?></td>
                             <td><span class="badge bg-primary"><?= htmlspecialchars(ucfirst($quote['status'])) ?></span></td>
                             <td><?= quotation_format_money($quote['grand_total'], $quote['currency']) ?></td>
                             <td><?= htmlspecialchars(date('d M Y', strtotime($quote['created_at']))) ?></td>
                         </tr>
                     <?php endforeach; else: ?>
-                        <tr><td colspan="6" class="text-center py-4">No quotation found.</td></tr>
+                        <tr><td colspan="7" class="text-center py-4">No quotation found.</td></tr>
                     <?php endif; ?>
                 </tbody>
             </table>

@@ -13,16 +13,16 @@ $limit = 10;
 
 if ($search !== '') {
     $row = db_select_one(
-        "SELECT COUNT(*) AS total FROM leads WHERE name LIKE ? OR email LIKE ? OR phone LIKE ? OR company LIKE ?",
-        'ssss',
-        [$search_like, $search_like, $search_like, $search_like]
+        "SELECT COUNT(*) AS total FROM leads WHERE name LIKE ? OR email LIKE ? OR phone LIKE ? OR company LIKE ? OR address LIKE ?",
+        'sssss',
+        [$search_like, $search_like, $search_like, $search_like, $search_like]
     );
     $total_data = (int) ($row['total'] ?? 0);
     $pagination = admin_pagination_meta($total_data, $page_num, $limit);
     $leads = db_select_all(
-        "SELECT * FROM leads WHERE name LIKE ? OR email LIKE ? OR phone LIKE ? OR company LIKE ? ORDER BY id DESC LIMIT ?, ?",
-        'ssssii',
-        [$search_like, $search_like, $search_like, $search_like, $pagination['offset'], $pagination['limit']]
+        "SELECT * FROM leads WHERE name LIKE ? OR email LIKE ? OR phone LIKE ? OR company LIKE ? OR address LIKE ? ORDER BY id DESC LIMIT ?, ?",
+        'sssssii',
+        [$search_like, $search_like, $search_like, $search_like, $search_like, $pagination['offset'], $pagination['limit']]
     );
 } else {
     $row = db_select_one("SELECT COUNT(*) AS total FROM leads");
@@ -51,7 +51,7 @@ if ($search !== '') {
         </div>
         <div class="table-responsive">
             <table class="table align-middle">
-                <thead><tr><th>Name</th><th>Contact</th><th>Source</th><th>Status</th><th>Date</th></tr></thead>
+                <thead><tr><th>Name</th><th>Contact</th><th>Address</th><th>Source</th><th>Status</th><th>Date</th></tr></thead>
                 <tbody>
                     <?php if ($leads): foreach ($leads as $lead): ?>
                         <tr>
@@ -62,12 +62,13 @@ if ($search !== '') {
                                 <span class="text-secondary"><?= htmlspecialchars($lead['company'] ?: '-') ?></span>
                             </td>
                             <td><?= htmlspecialchars($lead['email'] ?: '-') ?><br><span class="text-secondary"><?= htmlspecialchars($lead['phone'] ?: '-') ?></span></td>
+                            <td><?= nl2br(htmlspecialchars($lead['address'] ?: '-')) ?></td>
                             <td><?= htmlspecialchars(ucfirst($lead['source'])) ?></td>
                             <td><span class="badge bg-primary"><?= htmlspecialchars(ucfirst($lead['status'])) ?></span></td>
                             <td><?= htmlspecialchars(date('d M Y', strtotime($lead['created_at']))) ?></td>
                         </tr>
                     <?php endforeach; else: ?>
-                        <tr><td colspan="5" class="text-center py-4">No leads found.</td></tr>
+                        <tr><td colspan="6" class="text-center py-4">No leads found.</td></tr>
                     <?php endif; ?>
                 </tbody>
             </table>

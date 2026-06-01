@@ -13,6 +13,7 @@
             <div class="col-md-6 mb-20"><label class="label fs-16 mb-2">Email</label><input type="email" class="form-control" name="email" value="<?= htmlspecialchars($lead['email'] ?? '') ?>"></div>
             <div class="col-md-6 mb-20"><label class="label fs-16 mb-2">Phone</label><input class="form-control" name="phone" value="<?= htmlspecialchars($lead['phone'] ?? '') ?>"></div>
             <div class="col-md-6 mb-20"><label class="label fs-16 mb-2">Company</label><input class="form-control" name="company" value="<?= htmlspecialchars($lead['company'] ?? '') ?>"></div>
+            <div class="col-12 mb-20"><label class="label fs-16 mb-2">Address</label><textarea class="form-control" name="address" rows="3"><?= htmlspecialchars($lead['address'] ?? '') ?></textarea></div>
             <div class="col-md-4 mb-20"><label class="label fs-16 mb-2">Source</label><input class="form-control" name="source" value="<?= htmlspecialchars($lead['source'] ?? 'manual') ?>"></div>
             <div class="col-md-4 mb-20"><label class="label fs-16 mb-2">Interest</label><input class="form-control" name="interest_type" value="<?= htmlspecialchars($lead['interest_type'] ?? '') ?>"></div>
             <div class="col-md-4 mb-20">

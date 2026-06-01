@@ -77,6 +77,7 @@ include __DIR__ . '/../includes/sidebar.php';
                     'Sales Representative' => detail_text($sales_name),
                     'Customer Email' => detail_text($quote['customer_email']),
                     'Customer Phone' => detail_text($quote['customer_phone']),
+                    'Customer Address' => nl2br(detail_text($quote['customer_address'] ?? '')),
                     'Notes' => nl2br(detail_text($quote['notes'])),
                 ]); ?>
             <?php detail_card_close(); ?>

@@ -23,6 +23,7 @@ $customer_name = $_POST['customer_name'] ?? ($inquiry['name'] ?? ($lead_from_url
 $customer_email = $_POST['customer_email'] ?? ($inquiry['email'] ?? ($lead_from_url['email'] ?? ''));
 $customer_phone = $_POST['customer_phone'] ?? ($inquiry['phone'] ?? ($lead_from_url['phone'] ?? ''));
 $customer_company = $_POST['customer_company'] ?? ($lead_from_url['company'] ?? '');
+$customer_address = $_POST['customer_address'] ?? ($lead_from_url['address'] ?? ($inquiry['address'] ?? ''));
 $valid_until = $_POST['valid_until'] ?? date('Y-m-d', strtotime('+14 days'));
 $status = $_POST['status'] ?? 'draft';
 $notes = $_POST['notes'] ?? '';
@@ -39,6 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $customer_name = trim($customer_name);
     $customer_email = trim($customer_email);
+    $customer_address = trim($customer_address);
     $allowed_status = ['draft', 'sent', 'accepted', 'rejected', 'cancelled'];
 
     if ($customer_name === '') {
@@ -58,9 +60,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $quotation_id = db_insert(
             "INSERT INTO quotations
-             (quote_number, inquiry_id, lead_id, quote_type, customer_name, customer_email, customer_phone, customer_company, currency, status, valid_until, notes, discount, tax, created_by)
-             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-            'siisssssssssddi',
+             (quote_number, inquiry_id, lead_id, quote_type, customer_name, customer_email, customer_phone, customer_company, customer_address, currency, status, valid_until, notes, discount, tax, created_by)
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            'siissssssssssddi',
             [
                 $quote_number,
                 $inquiry_id ?: null,
@@ -70,6 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $customer_email,
                 trim($customer_phone),
                 trim($customer_company),
+                $customer_address,
                 $currency,
                 $status,
                 $valid_until ?: null,
@@ -159,6 +162,10 @@ include __DIR__ . '/../includes/sidebar.php';
             <div class="col-lg-3 col-md-6 mb-20">
                 <label class="label fs-16 mb-2">Company</label>
                 <input type="text" name="customer_company" class="form-control" value="<?= htmlspecialchars($customer_company) ?>">
+            </div>
+            <div class="col-lg-6 col-md-12 mb-20">
+                <label class="label fs-16 mb-2">Address</label>
+                <textarea name="customer_address" class="form-control" rows="3"><?= htmlspecialchars($customer_address) ?></textarea>
             </div>
             <div class="col-lg-3 col-md-6 mb-20">
                 <label class="label fs-16 mb-2">Status</label>
