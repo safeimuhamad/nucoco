@@ -57,6 +57,23 @@ if (!function_exists('quotation_format_quantity')) {
     }
 }
 
+if (!function_exists('quotation_catalog_description')) {
+    function quotation_catalog_description($name, $quotation_description = '', $language = 'en', $type = 'product')
+    {
+        $description = trim(preg_replace('/\s+/', ' ', strip_tags((string) $quotation_description)));
+        if ($description !== '') {
+            return $description;
+        }
+
+        if (function_exists('product_default_quotation_description')) {
+            return product_default_quotation_description($name, $language, $type);
+        }
+
+        $name = trim((string) $name);
+        return 'Standard specification for ' . ($name !== '' ? $name : 'item') . '. Suitable for quotation requirements.';
+    }
+}
+
 if (!function_exists('nucoco_customer_address_fallback')) {
     function nucoco_customer_address_fallback($customer_name, $customer_email = '')
     {

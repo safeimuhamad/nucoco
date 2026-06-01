@@ -1,6 +1,7 @@
 <?php
 include __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../includes/db.php';
+require_once __DIR__ . '/../includes/helpers.php';
 require_once __DIR__ . '/helpers.php';
 
 $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
@@ -51,11 +52,15 @@ function invoice_print_date($date)
     return $date ? date('d M Y', strtotime($date)) : '-';
 }
 
-function invoice_print_short_description($description)
+function invoice_print_short_description($item, $currency)
 {
-    $description = trim(preg_replace('/\s+/', ' ', strip_tags((string) $description)));
+    $description = trim(preg_replace('/\s+/', ' ', strip_tags((string) ($item['description'] ?? ''))));
     if ($description === '') {
-        return '-';
+        return product_default_quotation_description($item['item_name'] ?? '', $currency === 'IDR' ? 'id' : 'en', ($item['item_type'] ?? 'product') === 'service' ? 'service' : 'product');
+    }
+
+    if (strlen($description) > 160) {
+        return product_default_quotation_description($item['item_name'] ?? '', $currency === 'IDR' ? 'id' : 'en', ($item['item_type'] ?? 'product') === 'service' ? 'service' : 'product');
     }
 
     return strlen($description) > 95 ? substr($description, 0, 92) . '...' : $description;
@@ -248,7 +253,7 @@ $amount_words = $currency === 'IDR'
                         <td class="center"><span class="number-pill"><?= $index + 1 ?></span></td>
                         <td>
                             <strong class="item-name"><?= htmlspecialchars($item['item_name']) ?></strong>
-                            <span class="item-description"><?= htmlspecialchars(invoice_print_short_description($item['description'] ?? '')) ?></span>
+                            <span class="item-description"><?= htmlspecialchars(invoice_print_short_description($item, $currency)) ?></span>
                         </td>
                         <td class="center"><?= quotation_format_quantity($item['quantity']) ?></td>
                         <td class="center"><?= htmlspecialchars($item['unit']) ?></td>

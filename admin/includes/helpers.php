@@ -168,6 +168,25 @@ if (!function_exists('product_category_label')) {
     }
 }
 
+if (!function_exists('product_default_quotation_description')) {
+    function product_default_quotation_description($name, $language = 'en', $type = 'product')
+    {
+        $name = trim((string) $name);
+        $item = $name !== '' ? $name : ($type === 'service' ? 'service' : 'product');
+        $language = $language === 'id' ? 'id' : 'en';
+
+        if ($type === 'service') {
+            return $language === 'id'
+                ? 'Lingkup layanan standar untuk ' . $item . '. Cocok untuk kebutuhan penawaran dan operasional.'
+                : 'Standard service scope for ' . $item . '. Suitable for quotation and operational requirements.';
+        }
+
+        return $language === 'id'
+            ? 'Spesifikasi standar untuk ' . $item . '. Cocok untuk kebutuhan penawaran dan pengadaan.'
+            : 'Standard specification for ' . $item . '. Suitable for quotation and supply requirements.';
+    }
+}
+
 function convert_to_webp($source, $destination, $quality = 80)
 {
     if (!file_exists($source)) {

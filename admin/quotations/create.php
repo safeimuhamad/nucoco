@@ -3,6 +3,7 @@ $page = 'quotations';
 include __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../includes/db.php';
 require_once __DIR__ . '/../includes/detail-ui.php';
+require_once __DIR__ . '/../includes/helpers.php';
 require_once __DIR__ . '/helpers.php';
 
 $error = '';
@@ -207,14 +208,14 @@ include __DIR__ . '/../includes/sidebar.php';
                                     <option value="">Manual item</option>
                                     <optgroup label="Products">
                                         <?php foreach ($products as $product): ?>
-                                            <option value="product:<?= (int) $product['id'] ?>" data-name="<?= htmlspecialchars($product['name']) ?>" data-price="<?= (float) ($product['price'] ?? 0) ?>" data-description="<?= htmlspecialchars(strip_tags($product['quotation_description'] ?: ($product['description'] ?? ''))) ?>">
+                                            <option value="product:<?= (int) $product['id'] ?>" data-name="<?= htmlspecialchars($product['name']) ?>" data-price="<?= (float) ($product['price'] ?? 0) ?>" data-description="<?= htmlspecialchars(quotation_catalog_description($product['name'], $product['quotation_description'] ?? '', $language, 'product')) ?>">
                                                 Product - <?= htmlspecialchars($product['name']) ?>
                                             </option>
                                         <?php endforeach; ?>
                                     </optgroup>
                                     <optgroup label="Services">
                                         <?php foreach ($services as $service): ?>
-                                            <option value="service:<?= (int) $service['id'] ?>" data-name="<?= htmlspecialchars($service['title']) ?>" data-price="0" data-description="<?= htmlspecialchars(strip_tags($service['quotation_description'] ?: ($service['short_description'] ?? ''))) ?>">
+                                            <option value="service:<?= (int) $service['id'] ?>" data-name="<?= htmlspecialchars($service['title']) ?>" data-price="0" data-description="<?= htmlspecialchars(quotation_catalog_description($service['title'], $service['quotation_description'] ?? '', $language, 'service')) ?>">
                                                 Service - <?= htmlspecialchars($service['title']) ?>
                                             </option>
                                         <?php endforeach; ?>

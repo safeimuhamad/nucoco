@@ -33,6 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $status = trim($_POST['status'] ?? 'draft');
     $description = trim($_POST['description'] ?? '');
     $quotation_description = trim($_POST['quotation_description'] ?? '');
+    if ($quotation_description === '' && $name !== '') {
+        $quotation_description = product_default_quotation_description($name, $language, 'product');
+    }
 
     $allowed_status = ['publish', 'draft'];
     $allowed_language = ['id', 'en'];

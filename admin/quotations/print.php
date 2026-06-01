@@ -1,6 +1,7 @@
 <?php
 include __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../includes/db.php';
+require_once __DIR__ . '/../includes/helpers.php';
 require_once __DIR__ . '/helpers.php';
 
 $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
@@ -157,6 +158,20 @@ $currency_label = $quote['currency'] . ($quote['currency'] === 'IDR' ? ($is_inte
 $amount_words = $is_international
     ? ucwords(print_number_words_en($quote['grand_total'])) . ($quote['currency'] === 'USD' ? ' Dollars Only' : ' Rupiah Only')
     : ucfirst(print_number_words_id($quote['grand_total'])) . ' rupiah';
+
+function print_quotation_item_description($item, $is_international)
+{
+    $description = trim(preg_replace('/\s+/', ' ', strip_tags((string) ($item['description'] ?? ''))));
+    if ($description !== '' && strlen($description) <= 160) {
+        return $description;
+    }
+
+    return product_default_quotation_description(
+        $item['item_name'] ?? '',
+        $is_international ? 'en' : 'id',
+        ($item['item_type'] ?? 'product') === 'service' ? 'service' : 'product'
+    );
+}
 ?>
 <!doctype html>
 <html lang="<?= $is_international ? 'en' : 'id' ?>">
@@ -564,7 +579,7 @@ $amount_words = $is_international
                         <tr>
                             <td class="no"><span class="number-pill"><?= $index + 1 ?></span></td>
                             <td><strong><?= htmlspecialchars($item['item_name']) ?></strong></td>
-                            <td><?= htmlspecialchars($item['description'] ?: '-') ?></td>
+                            <td><?= htmlspecialchars(print_quotation_item_description($item, $is_international)) ?></td>
                             <td class="center"><?= number_format((float) $item['quantity'], 0, ',', '.') ?></td>
                             <td class="center"><?= htmlspecialchars($item['unit']) ?></td>
                             <td class="right"><?= print_money($item['unit_price'], $quote['currency'], $is_international) ?></td>
