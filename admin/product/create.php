@@ -20,6 +20,7 @@ $status = 'draft';
 $seo_keywords = '';
 $description = '';
 $quotation_description = '';
+product_categories_ensure_schema($conn);
 $product_category_labels = product_category_labels($conn);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

@@ -48,6 +48,7 @@ $seo_keywords = $product['seo_keywords'] ?? '';
 $description = $product['description'] ?? '';
 $quotation_description = $product['quotation_description'] ?? '';
 $current_image = $product['image'] ?? '';
+product_categories_ensure_schema($conn);
 $product_category_labels = product_category_labels($conn);
 
 /*

@@ -3,6 +3,8 @@ $page = 'product-categories';
 include __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../includes/db.php';
 require_once __DIR__ . '/../includes/detail-ui.php';
+require_once __DIR__ . '/../includes/helpers.php';
+product_categories_ensure_schema($conn);
 
 $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 $category = db_select_one("SELECT * FROM product_categories WHERE id = ? LIMIT 1", 'i', [$id]);

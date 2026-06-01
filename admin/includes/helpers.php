@@ -101,6 +101,63 @@ if (!function_exists('product_category_labels')) {
     }
 }
 
+if (!function_exists('product_categories_ensure_schema')) {
+    function product_categories_ensure_schema($conn = null)
+    {
+        if ($conn === null && isset($GLOBALS['conn']) && $GLOBALS['conn'] instanceof mysqli) {
+            $conn = $GLOBALS['conn'];
+        }
+
+        if (!$conn instanceof mysqli) {
+            return false;
+        }
+
+        mysqli_query(
+            $conn,
+            "CREATE TABLE IF NOT EXISTS `product_categories` (
+              `id` int(11) NOT NULL AUTO_INCREMENT,
+              `category_key` varchar(100) NOT NULL,
+              `label_en` varchar(150) NOT NULL,
+              `label_id` varchar(150) NOT NULL,
+              `sort_order` int(11) NOT NULL DEFAULT 0,
+              `status` enum('active','inactive') NOT NULL DEFAULT 'active',
+              `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+              `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+              PRIMARY KEY (`id`),
+              UNIQUE KEY `category_key` (`category_key`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci"
+        );
+
+        foreach (product_default_category_labels() as $key => $labels) {
+            $sort_order = [
+                'Fresh Coconut' => 10,
+                'Coconut Ingredients' => 20,
+                'Coconut Derivatives' => 30,
+                'Coconut Industrial Product' => 40,
+            ][$key] ?? 100;
+
+            $stmt = mysqli_prepare(
+                $conn,
+                "INSERT INTO product_categories (category_key, label_en, label_id, sort_order, status)
+                 VALUES (?, ?, ?, ?, 'active')
+                 ON DUPLICATE KEY UPDATE
+                    label_en = VALUES(label_en),
+                    label_id = VALUES(label_id),
+                    sort_order = VALUES(sort_order),
+                    status = VALUES(status)"
+            );
+
+            if ($stmt) {
+                mysqli_stmt_bind_param($stmt, 'sssi', $key, $labels['en'], $labels['id'], $sort_order);
+                mysqli_stmt_execute($stmt);
+                mysqli_stmt_close($stmt);
+            }
+        }
+
+        return true;
+    }
+}
+
 if (!function_exists('product_category_label')) {
     function product_category_label($category, $language)
     {
