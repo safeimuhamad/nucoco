@@ -117,6 +117,13 @@ $sales_name = $creator['name'] ?? ($_SESSION['name'] ?? 'Sales Nucoco');
 $project = $quote['customer_company'] ?: ($quote['notes'] ? strtok($quote['notes'], "\n") : ($is_international ? 'Product / Service Supply' : 'Penawaran Produk / Layanan'));
 $customer_title = $quote['customer_name'];
 $customer_address = trim($quote['customer_address'] ?? '');
+if ($customer_address === '' && !empty($quote['lead_id'])) {
+    $lead_address = db_select_one("SELECT address FROM leads WHERE id = ? LIMIT 1", 'i', [(int) $quote['lead_id']]);
+    $customer_address = trim($lead_address['address'] ?? '');
+}
+if ($customer_address === '') {
+    $customer_address = nucoco_customer_address_fallback($quote['customer_name'] ?? '', $quote['customer_email'] ?? '');
+}
 $company_name = trim($web_config['company_name'] ?? '') ?: 'NUCOCO';
 $company_email = trim($web_config['email'] ?? '') ?: 'sales@nucoco.com';
 $company_phone = trim($web_config['phone'] ?? '') ?: (trim($web_config['whatsapp'] ?? '') ?: '-');

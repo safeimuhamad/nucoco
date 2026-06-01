@@ -24,6 +24,18 @@ $company_website = 'www.nucoco.com';
 $payment_account_name = $company_name;
 $currency = $invoice['currency'];
 $taxable_amount = max(0, (float) $invoice['subtotal'] - (float) $invoice['discount']);
+$customer_address = trim($invoice['customer_address'] ?? '');
+if ($customer_address === '' && !empty($invoice['quotation_id'])) {
+    $quote_address = db_select_one("SELECT customer_address FROM quotations WHERE id = ? LIMIT 1", 'i', [(int) $invoice['quotation_id']]);
+    $customer_address = trim($quote_address['customer_address'] ?? '');
+}
+if ($customer_address === '' && !empty($invoice['lead_id'])) {
+    $lead_address = db_select_one("SELECT address FROM leads WHERE id = ? LIMIT 1", 'i', [(int) $invoice['lead_id']]);
+    $customer_address = trim($lead_address['address'] ?? '');
+}
+if ($customer_address === '') {
+    $customer_address = nucoco_customer_address_fallback($invoice['customer_name'] ?? '', $invoice['customer_email'] ?? '');
+}
 
 function invoice_print_money($amount, $currency, bool $with_currency = false)
 {
@@ -176,8 +188,8 @@ $amount_words = $currency === 'IDR'
                 <div class="section-label">BILL TO:</div>
                 <h2><?= htmlspecialchars($invoice['customer_name']) ?></h2>
                 <div><?= htmlspecialchars($invoice['customer_company'] ?: '-') ?></div>
-                <?php if (!empty($invoice['customer_address'])): ?>
-                    <div><?= nl2br(htmlspecialchars($invoice['customer_address'])) ?></div>
+                <?php if ($customer_address !== ''): ?>
+                    <div><?= nl2br(htmlspecialchars($customer_address)) ?></div>
                 <?php endif; ?>
                 <div class="contact-line"><span class="icon">☎</span><span><?= htmlspecialchars($invoice['customer_phone'] ?: '-') ?></span></div>
                 <div class="contact-line"><span class="icon">✉</span><span><?= htmlspecialchars($invoice['customer_email'] ?: '-') ?></span></div>

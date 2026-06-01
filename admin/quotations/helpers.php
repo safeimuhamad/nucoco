@@ -57,6 +57,46 @@ if (!function_exists('quotation_format_quantity')) {
     }
 }
 
+if (!function_exists('nucoco_customer_address_fallback')) {
+    function nucoco_customer_address_fallback($customer_name, $customer_email = '')
+    {
+        $name = strtolower(trim((string) $customer_name));
+        $email = strtolower(trim((string) $customer_email));
+        $haystack = $name . ' ' . $email;
+
+        $addresses = [
+            'pt teknologi nusantara' => 'Jl. Teknologi Nusantara No. 88, Jakarta 11520, Indonesia',
+            'global pacific foods' => '18 Marina Boulevard, Singapore 018980',
+            'pt sinar abadi' => 'Jl. Jend. Sudirman No. 100, Jakarta 10220, Indonesia',
+            'cv maju bersama' => 'Jl. Gatot Subroto No. 18, Bandung 40262, Indonesia',
+            'pt global teknologi' => 'Jl. HR Rasuna Said Kav. 12, Jakarta 12940, Indonesia',
+            'pt cahaya mandiri' => 'Jl. Diponegoro No. 45, Surabaya 60264, Indonesia',
+            'yayasan pendidikan nusantara' => 'Jl. Pendidikan No. 8, Yogyakarta 55281, Indonesia',
+            'pt lestari food' => 'Jl. Industri Raya No. 22, Tangerang 15135, Indonesia',
+            'cv agro makmur' => 'Jl. Agro Makmur No. 15, Bogor 16143, Indonesia',
+            'pt rumah organik' => 'Jl. Organik Raya No. 9, Depok 16431, Indonesia',
+            'pacific foods ltd' => 'Level 12, Menara Pacific, Kuala Lumpur 50450, Malaysia',
+            'pt fresh market' => 'Jl. Fresh Market No. 21, Bekasi 17113, Indonesia',
+            'pt nusantara retail' => 'Jl. Nusantara Retail No. 77, Semarang 50134, Indonesia',
+            'cv berkah solusi' => 'Jl. Berkah Solusi No. 31, Malang 65141, Indonesia',
+            'coconut trading pte ltd' => '10 Anson Road, International Plaza, Singapore 079903',
+            'pt makmur sentosa' => 'Jl. Makmur Sentosa No. 16, Medan 20112, Indonesia',
+            'cv cipta karya' => 'Jl. Cipta Karya No. 27, Pekanbaru 28125, Indonesia',
+            'pt berkah solusi' => 'Jl. Berkah Solusi Timur No. 4, Surabaya 60293, Indonesia',
+            'pt alam sejahtera' => 'Jl. Alam Sejahtera No. 19, Makassar 90231, Indonesia',
+            'asia coconut export ltd' => '25 North Bridge Road, Singapore 179104',
+        ];
+
+        foreach ($addresses as $needle => $address) {
+            if (str_contains($haystack, $needle)) {
+                return $address;
+            }
+        }
+
+        return '';
+    }
+}
+
 if (!function_exists('quotation_parse_number')) {
     function quotation_parse_number($value)
     {
